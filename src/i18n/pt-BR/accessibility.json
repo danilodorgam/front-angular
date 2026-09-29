@@ -1,0 +1,33 @@
+{
+  "bar": {
+    "label": "Atalhos e recursos de acessibilidade",
+    "goToContent": "Ir para o conteúdo",
+    "goToMenu": "Ir para o menu",
+    "goToFooter": "Ir para o rodapé",
+    "page": "Acessibilidade",
+    "highContrast": "Alto contraste",
+    "increaseFont": "Aumentar tamanho da fonte",
+    "decreaseFont": "Diminuir tamanho da fonte",
+    "resetFont": "Tamanho de fonte padrão"
+  },
+  "routeChanged": "Página carregada: {{title}}",
+  "page": {
+    "title": "Acessibilidade",
+    "intro": "Este sistema foi desenvolvido seguindo as recomendações do Modelo de Acessibilidade em Governo Eletrônico (e-MAG) e das Diretrizes de Acessibilidade para Conteúdo Web (WCAG).",
+    "shortcutsTitle": "Atalhos de teclado",
+    "shortcutsIntro": "Os atalhos abaixo levam diretamente aos principais blocos da página:",
+    "shortcutContent": "Alt + 1: ir para o conteúdo",
+    "shortcutMenu": "Alt + 2: ir para o menu",
+    "shortcutFooter": "Alt + 4: ir para o rodapé",
+    "shortcutBrowsers": "No Firefox use Alt + Shift + número; no Safari e no Chrome para macOS use Control + Option + número.",
+    "contrastTitle": "Alto contraste",
+    "contrastText": "O botão \"Alto contraste\", na barra superior, aplica cores com maior contraste. A preferência fica salva neste navegador.",
+    "fontTitle": "Tamanho da fonte",
+    "fontText": "Use os botões A+ e A- da barra superior ou o zoom do navegador (Ctrl + e Ctrl -). O layout se adapta até 200% de ampliação.",
+    "formsTitle": "Formulários",
+    "formsText": "Campos obrigatórios são marcados com asterisco. Erros são descritos em texto junto ao campo e listados em um resumo no topo do formulário, com links para cada campo.",
+    "readersTitle": "Leitores de tela",
+    "readersText": "A estrutura da página usa marcação semântica (cabeçalhos, regiões e rótulos) compatível com leitores de tela como NVDA, JAWS, Orca e VoiceOver.",
+    "moreInfo": "Saiba mais sobre o e-MAG"
+  }
+}

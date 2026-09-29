@@ -1,0 +1,32 @@
+{
+  "network": "Could not reach the server. Check your connection and try again.",
+  "timeout": "The server took too long to respond. Please try again shortly.",
+  "badRequest": "The submitted data was not accepted. Please review it.",
+  "unauthorized": "Your session has expired. Please sign in again.",
+  "forbidden": "You do not have permission to perform this action.",
+  "notFound": "The requested record was not found.",
+  "conflict": "This record was changed by someone else. Please reload the page.",
+  "validation": "Some data was not accepted. Please review the form.",
+  "server": "A server error occurred. Please try again later.",
+  "unavailable": "The service is temporarily unavailable. Please try again later.",
+  "unexpected": "An unexpected error occurred. If the problem persists, contact support.",
+  "notification": {
+    "region": "Notifications",
+    "dismiss": "Dismiss notification"
+  },
+  "pages": {
+    "backHome": "Back to the home page",
+    "notFound": {
+      "title": "Page not found",
+      "message": "This address does not exist or has been removed. Check that it was typed correctly."
+    },
+    "forbidden": {
+      "title": "Access denied",
+      "message": "You do not have permission to access this page."
+    },
+    "server": {
+      "title": "Service unavailable",
+      "message": "This page could not be loaded right now. Please try again in a few minutes."
+    }
+  }
+}

@@ -1,0 +1,66 @@
+<h1>{{ (isEdit() ? 'estoque.edit.titleEdit' : 'estoque.edit.titleNew') | translate }}</h1>
+
+@if (loading()) {
+  <p role="status">{{ 'common.loading' | translate }}</p>
+} @else if (notFound()) {
+  <div class="alert alert--error">{{ 'estoque.detail.notFound' | translate }}</div>
+  <a routerLink="/estoque">{{ 'common.actions.back' | translate }}</a>
+} @else {
+  <p class="text-muted">{{ 'common.requiredFieldsNotice' | translate }}</p>
+
+  <app-form-error-summary [form]="form" [fields]="fields" [submitAttempt]="submitAttempt()" />
+
+  <form class="form form--wide" novalidate [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-grid">
+      <app-text-field
+        inputId="item-sku"
+        label="estoque.fields.sku"
+        hint="estoque.hints.sku"
+        [maxlength]="20"
+        [control]="form.controls.sku"
+      />
+      <app-text-field inputId="item-name" label="estoque.fields.name" [maxlength]="100" [control]="form.controls.name" />
+      <app-number-field
+        inputId="item-quantity"
+        label="estoque.fields.quantity"
+        hint="estoque.hints.quantity"
+        [control]="form.controls.quantity"
+      />
+      <app-number-field
+        inputId="item-minimum-stock"
+        label="estoque.fields.minimumStock"
+        hint="estoque.hints.minimumStock"
+        [control]="form.controls.minimumStock"
+      />
+      <app-number-field
+        inputId="item-unit-price"
+        label="estoque.fields.unitPrice"
+        hint="estoque.hints.unitPrice"
+        [allowDecimal]="true"
+        [control]="form.controls.unitPrice"
+      />
+      <app-email-field
+        inputId="item-supplier-email"
+        label="estoque.fields.supplierEmail"
+        autocomplete="off"
+        [control]="form.controls.supplierEmail"
+      />
+    </div>
+
+    <app-textarea-field
+      inputId="item-description"
+      label="estoque.fields.description"
+      [maxlength]="500"
+      [control]="form.controls.description"
+    />
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn--primary" [disabled]="saving()" [attr.aria-busy]="saving()">
+        {{ (saving() ? 'common.actions.saving' : 'common.actions.save') | translate }}
+      </button>
+      <a class="btn btn--secondary" [routerLink]="isEdit() ? ['/estoque', id()] : ['/estoque']">
+        {{ 'common.actions.cancel' | translate }}
+      </a>
+    </div>
+  </form>
+}

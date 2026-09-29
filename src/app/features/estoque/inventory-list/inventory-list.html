@@ -1,0 +1,84 @@
+<header class="page-header">
+  <div>
+    <h1>{{ 'estoque.list.title' | translate }}</h1>
+    <p class="text-muted">{{ 'estoque.list.intro' | translate }}</p>
+  </div>
+  <a routerLink="/estoque/novo" class="btn btn--primary">{{ 'estoque.list.newItem' | translate }}</a>
+</header>
+
+<form role="search" class="search-form" novalidate (submit)="onSearch($event)">
+  <app-text-field
+    inputId="busca"
+    type="search"
+    label="estoque.list.searchLabel"
+    hint="estoque.list.searchHint"
+    [control]="search"
+  />
+  <div class="form-actions">
+    <button type="submit" class="btn btn--primary">{{ 'common.actions.search' | translate }}</button>
+    <button type="button" class="btn btn--secondary" (click)="clearSearch()">
+      {{ 'common.actions.clear' | translate }}
+    </button>
+  </div>
+</form>
+
+<div [attr.aria-busy]="loading()">
+  @if (loading()) {
+    <p role="status">{{ 'common.loading' | translate }}</p>
+  } @else if (loadFailed()) {
+    <div class="alert alert--error">
+      <p>{{ 'estoque.list.loadFailed' | translate }}</p>
+      <button type="button" class="btn btn--secondary btn--small" (click)="load()">
+        {{ 'estoque.list.retry' | translate }}
+      </button>
+    </div>
+  } @else if (items().length === 0) {
+    <p role="status">{{ 'estoque.list.empty' | translate }}</p>
+  } @else {
+    <div class="table-wrapper">
+      <table class="table">
+        <caption>{{ 'estoque.list.caption' | translate: { count: items().length } }}</caption>
+        <thead>
+          <tr>
+            <th scope="col">{{ 'estoque.fields.sku' | translate }}</th>
+            <th scope="col">{{ 'estoque.fields.name' | translate }}</th>
+            <th scope="col" class="table__numeric">{{ 'estoque.fields.quantity' | translate }}</th>
+            <th scope="col" class="table__numeric">{{ 'estoque.fields.unitPrice' | translate }}</th>
+            <th scope="col">{{ 'estoque.list.status' | translate }}</th>
+            <th scope="col">{{ 'estoque.list.actions' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of items(); track item.id) {
+            <tr>
+              <td>{{ item.sku }}</td>
+              <th scope="row">{{ item.name }}</th>
+              <td class="table__numeric">{{ item.quantity }}</td>
+              <td class="table__numeric">
+                {{ item.unitPrice | currency: 'BRL' : 'symbol' : '1.2-2' : translation.language() }}
+              </td>
+              <td>
+                @if (isLowStock(item)) {
+                  <span class="badge badge--warning">{{ 'estoque.status.low' | translate }}</span>
+                } @else {
+                  <span class="badge badge--success">{{ 'estoque.status.ok' | translate }}</span>
+                }
+              </td>
+              <td class="table__actions">
+                <!-- O texto oculto diferencia os links para leitores de tela ("Detalhes de Caneta azul"). -->
+                <a [routerLink]="['/estoque', item.id]">
+                  {{ 'estoque.list.details' | translate }}
+                  <span class="sr-only">{{ 'estoque.list.detailsOf' | translate: { name: item.name } }}</span>
+                </a>
+                <a [routerLink]="['/estoque', item.id, 'editar']">
+                  {{ 'common.actions.edit' | translate }}
+                  <span class="sr-only">{{ item.name }}</span>
+                </a>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,33 @@
+{
+  "bar": {
+    "label": "Accessibility shortcuts and tools",
+    "goToContent": "Skip to content",
+    "goToMenu": "Skip to menu",
+    "goToFooter": "Skip to footer",
+    "page": "Accessibility",
+    "highContrast": "High contrast",
+    "increaseFont": "Increase font size",
+    "decreaseFont": "Decrease font size",
+    "resetFont": "Default font size"
+  },
+  "routeChanged": "Page loaded: {{title}}",
+  "page": {
+    "title": "Accessibility",
+    "intro": "This system follows the Brazilian Electronic Government Accessibility Model (e-MAG) and the Web Content Accessibility Guidelines (WCAG).",
+    "shortcutsTitle": "Keyboard shortcuts",
+    "shortcutsIntro": "The shortcuts below take you straight to the main areas of the page:",
+    "shortcutContent": "Alt + 1: skip to content",
+    "shortcutMenu": "Alt + 2: skip to menu",
+    "shortcutFooter": "Alt + 4: skip to footer",
+    "shortcutBrowsers": "In Firefox use Alt + Shift + number; in Safari and Chrome on macOS use Control + Option + number.",
+    "contrastTitle": "High contrast",
+    "contrastText": "The \"High contrast\" button in the top bar switches to higher contrast colors. Your preference is saved in this browser.",
+    "fontTitle": "Font size",
+    "fontText": "Use the A+ and A- buttons in the top bar or the browser zoom (Ctrl + and Ctrl -). The layout adapts up to 200% zoom.",
+    "formsTitle": "Forms",
+    "formsText": "Required fields are marked with an asterisk. Errors are described in text next to each field and listed in a summary at the top of the form, with links to each field.",
+    "readersTitle": "Screen readers",
+    "readersText": "Pages use semantic markup (headings, landmarks and labels) compatible with screen readers such as NVDA, JAWS, Orca and VoiceOver.",
+    "moreInfo": "Learn more about e-MAG"
+  }
+}

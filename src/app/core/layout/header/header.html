@@ -1,0 +1,33 @@
+<header class="header">
+  <button
+    type="button"
+    class="header__menu-toggle"
+    aria-controls="menu"
+    [attr.aria-expanded]="layout.menuOpen()"
+    (click)="layout.toggleMenu()"
+  >
+    <svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24">
+      <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </svg>
+    <span class="sr-only">{{ 'common.menu.toggle' | translate }}</span>
+  </button>
+
+  <a routerLink="/" class="header__brand">
+    <!-- Logo decorativa: o nome do sistema ao lado já identifica o link. -->
+    <img src="assets/images/logo.svg" alt="" width="40" height="40" />
+    <span class="header__titles">
+      <span class="header__title">{{ 'common.appName' | translate }}</span>
+      <span class="header__subtitle">{{ 'common.organization' | translate }}</span>
+    </span>
+  </a>
+
+  <div class="header__actions">
+    <app-language-switcher />
+    @if (session.userName(); as name) {
+      <span class="header__user">{{ 'common.user.loggedAs' | translate: { name } }}</span>
+      <button type="button" class="btn btn--secondary btn--small" (click)="session.signOut()">
+        {{ 'common.actions.signOut' | translate }}
+      </button>
+    }
+  </div>
+</header>

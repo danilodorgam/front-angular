@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "sku": "Code (SKU)",
+    "name": "Name",
+    "description": "Description",
+    "quantity": "Quantity",
+    "minimumStock": "Minimum stock",
+    "unitPrice": "Unit price (BRL)",
+    "supplierEmail": "Supplier email"
+  },
+  "hints": {
+    "sku": "Up to 20 characters: letters, numbers and hyphen.",
+    "quantity": "Whole numbers only.",
+    "minimumStock": "At or below this quantity the item is flagged as low stock.",
+    "unitPrice": "Use a decimal point for cents, for example: 12.50."
+  },
+  "status": {
+    "low": "Low stock",
+    "ok": "Normal"
+  },
+  "list": {
+    "title": "Inventory items",
+    "intro": "Browse, register and update warehouse items.",
+    "searchLabel": "Search by name or code",
+    "searchHint": "Tip: search for \"erro500\" to see how server errors are handled.",
+    "newItem": "New item",
+    "caption": "Registered items ({{count}})",
+    "empty": "No items found.",
+    "loadFailed": "The item list could not be loaded.",
+    "retry": "Try again",
+    "actions": "Actions",
+    "status": "Status",
+    "details": "Details",
+    "detailsOf": "of {{name}}"
+  },
+  "detail": {
+    "title": "Item details",
+    "updatedAt": "Last updated",
+    "lowStockWarning": "Warning: quantity is at or below the minimum stock.",
+    "notFound": "Item not found. It may have been deleted.",
+    "deleteConfirm": "Do you really want to delete \"{{name}}\"? This action cannot be undone.",
+    "deleted": "Item deleted successfully."
+  },
+  "edit": {
+    "titleNew": "New item",
+    "titleEdit": "Edit item",
+    "saved": "Item saved successfully."
+  },
+  "errors": {
+    "skuTaken": "An item with this code already exists."
+  }
+}

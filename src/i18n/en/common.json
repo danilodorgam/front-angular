@@ -1,0 +1,37 @@
+{
+  "appName": "Inventory Control",
+  "organization": "Example Agency",
+  "requiredFieldsNotice": "Fields marked with an asterisk (*) are required.",
+  "loading": "Loading…",
+  "charactersRemaining": "{{count}} characters remaining",
+  "actions": {
+    "save": "Save",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "back": "Back",
+    "search": "Search",
+    "clear": "Clear",
+    "signOut": "Sign out"
+  },
+  "menu": {
+    "label": "Main menu",
+    "toggle": "Show or hide the menu",
+    "inventory": "Inventory items",
+    "newItem": "New item",
+    "accessibility": "Accessibility"
+  },
+  "language": {
+    "label": "Language"
+  },
+  "user": {
+    "loggedAs": "Hello, {{name}}"
+  },
+  "footer": {
+    "text": "Sample Angular front-end architecture application.",
+    "version": "Version {{version}}",
+    "environment": "Environment: {{name}}",
+    "accessibility": "Accessibility features"
+  }
+}

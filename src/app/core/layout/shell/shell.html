@@ -1,0 +1,12 @@
+<app-accessibility-bar />
+<app-header />
+
+<div class="shell" [class.shell--menu-open]="layout.menuOpen()">
+  <app-sidebar />
+  <main [id]="contentId" class="shell__main" tabindex="-1">
+    <router-outlet />
+  </main>
+</div>
+
+<app-footer />
+<app-notification-outlet />

@@ -1,0 +1,58 @@
+@if (loading()) {
+  <p role="status">{{ 'common.loading' | translate }}</p>
+} @else if (notFound()) {
+  <h1>{{ 'estoque.detail.title' | translate }}</h1>
+  <div class="alert alert--error">{{ 'estoque.detail.notFound' | translate }}</div>
+  <a routerLink="/estoque">{{ 'common.actions.back' | translate }}</a>
+} @else if (item(); as item) {
+  <header class="page-header">
+    <h1>{{ item.name }}</h1>
+    <div class="form-actions">
+      <a [routerLink]="['/estoque', item.id, 'editar']" class="btn btn--primary">{{ 'common.actions.edit' | translate }}</a>
+      <button type="button" class="btn btn--danger" (click)="remove(item)">{{ 'common.actions.delete' | translate }}</button>
+    </div>
+  </header>
+
+  @if (isLowStock(item)) {
+    <div class="alert alert--warning">{{ 'estoque.detail.lowStockWarning' | translate }}</div>
+  }
+
+  <dl class="details">
+    <div>
+      <dt>{{ 'estoque.fields.sku' | translate }}</dt>
+      <dd>{{ item.sku }}</dd>
+    </div>
+    <div>
+      <dt>{{ 'estoque.fields.quantity' | translate }}</dt>
+      <dd>{{ item.quantity }}</dd>
+    </div>
+    <div>
+      <dt>{{ 'estoque.fields.minimumStock' | translate }}</dt>
+      <dd>{{ item.minimumStock }}</dd>
+    </div>
+    <div>
+      <dt>{{ 'estoque.fields.unitPrice' | translate }}</dt>
+      <dd>{{ item.unitPrice | currency: 'BRL' : 'symbol' : '1.2-2' : translation.language() }}</dd>
+    </div>
+    <div>
+      <dt>{{ 'estoque.fields.supplierEmail' | translate }}</dt>
+      <dd>
+        @if (item.supplierEmail) {
+          <a [href]="'mailto:' + item.supplierEmail">{{ item.supplierEmail }}</a>
+        } @else {
+          —
+        }
+      </dd>
+    </div>
+    <div>
+      <dt>{{ 'estoque.detail.updatedAt' | translate }}</dt>
+      <dd>{{ item.updatedAt | date: 'short' : undefined : translation.language() }}</dd>
+    </div>
+    <div class="details__full">
+      <dt>{{ 'estoque.fields.description' | translate }}</dt>
+      <dd>{{ item.description || '—' }}</dd>
+    </div>
+  </dl>
+
+  <a routerLink="/estoque">{{ 'common.actions.back' | translate }}</a>
+}

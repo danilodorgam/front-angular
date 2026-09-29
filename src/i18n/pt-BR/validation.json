@@ -1,0 +1,17 @@
+{
+  "errorPrefix": "Erro:",
+  "required": "Preencha o campo {{field}}.",
+  "email": "Informe um e-mail válido, por exemplo: nome@exemplo.gov.br.",
+  "numeric": "O campo {{field}} aceita somente números inteiros.",
+  "minlength": "O campo {{field}} deve ter pelo menos {{requiredLength}} caracteres.",
+  "maxlength": "O campo {{field}} deve ter no máximo {{requiredLength}} caracteres.",
+  "min": "O campo {{field}} deve ser maior ou igual a {{min}}.",
+  "max": "O campo {{field}} deve ser menor ou igual a {{max}}.",
+  "pattern": "O campo {{field}} está em um formato inválido.",
+  "server": "{{message}}",
+  "invalid": "O campo {{field}} é inválido.",
+  "summary": {
+    "title": "Há problemas no formulário",
+    "intro": "Corrija os itens abaixo para continuar ({{count}}):"
+  }
+}

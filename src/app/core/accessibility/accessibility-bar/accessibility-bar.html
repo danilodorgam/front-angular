@@ -1,0 +1,66 @@
+<nav class="a11y-bar" [attr.aria-label]="'accessibility.bar.label' | translate">
+  <ul class="a11y-bar__list">
+    <li>
+      <a [href]="'#' + ids.content" accesskey="1" (click)="skipTo($event, ids.content)">
+        {{ 'accessibility.bar.goToContent' | translate }} <span aria-hidden="true">[1]</span>
+      </a>
+    </li>
+    <li>
+      <a [href]="'#' + ids.menu" accesskey="2" (click)="skipTo($event, ids.menu)">
+        {{ 'accessibility.bar.goToMenu' | translate }} <span aria-hidden="true">[2]</span>
+      </a>
+    </li>
+    <li>
+      <a [href]="'#' + ids.footer" accesskey="4" (click)="skipTo($event, ids.footer)">
+        {{ 'accessibility.bar.goToFooter' | translate }} <span aria-hidden="true">[4]</span>
+      </a>
+    </li>
+  </ul>
+
+  <ul class="a11y-bar__list a11y-bar__tools">
+    <li>
+      <a routerLink="/acessibilidade">{{ 'accessibility.bar.page' | translate }}</a>
+    </li>
+    <li>
+      <button
+        type="button"
+        class="a11y-bar__button"
+        [attr.aria-pressed]="a11y.highContrast()"
+        (click)="a11y.toggleHighContrast()"
+      >
+        {{ 'accessibility.bar.highContrast' | translate }}
+      </button>
+    </li>
+    <li class="a11y-bar__font">
+      <button
+        type="button"
+        class="a11y-bar__button"
+        [title]="'accessibility.bar.increaseFont' | translate"
+        [attr.aria-label]="'accessibility.bar.increaseFont' | translate"
+        [disabled]="!a11y.canIncreaseFont()"
+        (click)="a11y.increaseFont()"
+      >
+        A+
+      </button>
+      <button
+        type="button"
+        class="a11y-bar__button"
+        [title]="'accessibility.bar.resetFont' | translate"
+        [attr.aria-label]="'accessibility.bar.resetFont' | translate"
+        (click)="a11y.resetFont()"
+      >
+        A
+      </button>
+      <button
+        type="button"
+        class="a11y-bar__button"
+        [title]="'accessibility.bar.decreaseFont' | translate"
+        [attr.aria-label]="'accessibility.bar.decreaseFont' | translate"
+        [disabled]="!a11y.canDecreaseFont()"
+        (click)="a11y.decreaseFont()"
+      >
+        A-
+      </button>
+    </li>
+  </ul>
+</nav>

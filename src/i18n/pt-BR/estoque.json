@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "sku": "Código (SKU)",
+    "name": "Nome",
+    "description": "Descrição",
+    "quantity": "Quantidade",
+    "minimumStock": "Estoque mínimo",
+    "unitPrice": "Preço unitário (R$)",
+    "supplierEmail": "E-mail do fornecedor"
+  },
+  "hints": {
+    "sku": "Até 20 caracteres: letras, números e hífen.",
+    "quantity": "Somente números inteiros.",
+    "minimumStock": "Com esta quantidade ou menos, o item é sinalizado como estoque baixo.",
+    "unitPrice": "Use vírgula para os centavos, por exemplo: 12,50."
+  },
+  "status": {
+    "low": "Estoque baixo",
+    "ok": "Normal"
+  },
+  "list": {
+    "title": "Itens em estoque",
+    "intro": "Consulte, cadastre e atualize os itens do almoxarifado.",
+    "searchLabel": "Pesquisar por nome ou código",
+    "searchHint": "Dica: pesquise por \"erro500\" para ver o tratamento de erro do servidor.",
+    "newItem": "Cadastrar item",
+    "caption": "Itens cadastrados ({{count}})",
+    "empty": "Nenhum item encontrado.",
+    "loadFailed": "Não foi possível carregar a lista de itens.",
+    "retry": "Tentar novamente",
+    "actions": "Ações",
+    "status": "Situação",
+    "details": "Detalhes",
+    "detailsOf": "de {{name}}"
+  },
+  "detail": {
+    "title": "Detalhes do item",
+    "updatedAt": "Última atualização",
+    "lowStockWarning": "Atenção: a quantidade está igual ou abaixo do estoque mínimo.",
+    "notFound": "Item não encontrado. Ele pode ter sido excluído.",
+    "deleteConfirm": "Deseja realmente excluir o item \"{{name}}\"? Esta ação não pode ser desfeita.",
+    "deleted": "Item excluído com sucesso."
+  },
+  "edit": {
+    "titleNew": "Cadastrar item",
+    "titleEdit": "Editar item",
+    "saved": "Item salvo com sucesso."
+  },
+  "errors": {
+    "skuTaken": "Já existe um item com este código."
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "appName": "Controle de Estoque",
+  "organization": "Órgão Exemplo",
+  "requiredFieldsNotice": "Campos marcados com asterisco (*) são obrigatórios.",
+  "loading": "Carregando…",
+  "charactersRemaining": "{{count}} caracteres restantes",
+  "actions": {
+    "save": "Salvar",
+    "saving": "Salvando…",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "back": "Voltar",
+    "search": "Pesquisar",
+    "clear": "Limpar",
+    "signOut": "Sair"
+  },
+  "menu": {
+    "label": "Menu principal",
+    "toggle": "Exibir ou ocultar o menu",
+    "inventory": "Itens em estoque",
+    "newItem": "Cadastrar item",
+    "accessibility": "Acessibilidade"
+  },
+  "language": {
+    "label": "Idioma"
+  },
+  "user": {
+    "loggedAs": "Olá, {{name}}"
+  },
+  "footer": {
+    "text": "Aplicação de exemplo de arquitetura front-end em Angular.",
+    "version": "Versão {{version}}",
+    "environment": "Ambiente: {{name}}",
+    "accessibility": "Recursos de acessibilidade"
+  }
+}

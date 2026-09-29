@@ -1,0 +1,48 @@
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100%;
+  padding: 1rem 0;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border-light);
+
+  &[hidden] {
+    display: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  // Em telas pequenas o menu sobrepõe o conteúdo.
+  @media (max-width: 63.99em) {
+    position: absolute;
+    inset: 0 auto 0 0;
+    z-index: 10;
+    box-shadow: 0.25rem 0 1rem rgb(0 0 0 / 20%);
+  }
+}
+
+.sidebar__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar__link {
+  display: block;
+  padding: 0.75rem 1.5rem;
+  border-left: 0.25rem solid transparent;
+  color: var(--color-text);
+  text-decoration: none;
+
+  &:hover {
+    background: var(--color-hover);
+    text-decoration: underline;
+  }
+
+  &--active {
+    border-left-color: var(--color-primary);
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+}

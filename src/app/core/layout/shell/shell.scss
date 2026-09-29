@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.shell {
+  position: relative;
+  display: flex;
+  flex: 1;
+}
+
+.shell__main {
+  flex: 1;
+  min-width: 0;
+  padding: 1.5rem 1rem 3rem;
+
+  @media (min-width: 48em) {
+    padding: 2rem 2.5rem 4rem;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

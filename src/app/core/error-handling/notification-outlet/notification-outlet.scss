@@ -1,0 +1,58 @@
+.notifications {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: min(28rem, calc(100vw - 2rem));
+}
+
+.notification {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  border-left: 0.375rem solid currentColor;
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 20%);
+  color: var(--color-text);
+
+  &--success {
+    border-color: var(--color-success);
+    background: var(--color-success-bg);
+  }
+
+  &--info {
+    border-color: var(--color-primary);
+    background: var(--color-info-bg);
+  }
+
+  &--warning {
+    border-color: var(--color-warning);
+    background: var(--color-warning-bg);
+  }
+
+  &--error {
+    border-color: var(--color-danger);
+    background: var(--color-danger-bg);
+  }
+}
+
+.notification__message {
+  flex: 1;
+  margin: 0;
+}
+
+.notification__close {
+  min-width: 2rem;
+  min-height: 2rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}

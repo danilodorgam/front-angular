@@ -1,0 +1,32 @@
+{
+  "network": "Não foi possível conectar ao servidor. Verifique sua conexão e tente novamente.",
+  "timeout": "O servidor demorou para responder. Tente novamente em instantes.",
+  "badRequest": "Os dados enviados não foram aceitos. Revise as informações.",
+  "unauthorized": "Sua sessão expirou. Entre novamente para continuar.",
+  "forbidden": "Você não tem permissão para realizar esta ação.",
+  "notFound": "O registro solicitado não foi encontrado.",
+  "conflict": "O registro foi alterado por outra pessoa. Recarregue a página.",
+  "validation": "Alguns dados não foram aceitos. Revise o formulário.",
+  "server": "Ocorreu um erro no servidor. Tente novamente mais tarde.",
+  "unavailable": "O serviço está temporariamente indisponível. Tente novamente mais tarde.",
+  "unexpected": "Ocorreu um erro inesperado. Se o problema persistir, contate o suporte.",
+  "notification": {
+    "region": "Notificações",
+    "dismiss": "Fechar notificação"
+  },
+  "pages": {
+    "backHome": "Voltar para a página inicial",
+    "notFound": {
+      "title": "Página não encontrada",
+      "message": "O endereço acessado não existe ou foi removido. Confira se ele foi digitado corretamente."
+    },
+    "forbidden": {
+      "title": "Acesso negado",
+      "message": "Você não tem permissão para acessar esta página."
+    },
+    "server": {
+      "title": "Serviço indisponível",
+      "message": "Não foi possível carregar esta página agora. Tente novamente em alguns minutos."
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<section class="auth-card">
+  <h1>{{ 'auth.signIn.title' | translate }}</h1>
+  <p>{{ 'auth.signIn.intro' | translate }}</p>
+  <p class="text-muted">{{ 'common.requiredFieldsNotice' | translate }}</p>
+
+  <app-form-error-summary [form]="form" [fields]="fields" [submitAttempt]="submitAttempt()" />
+
+  @if (errorKey(); as key) {
+    <div class="alert alert--error" role="alert">{{ key | translate }}</div>
+  }
+
+  <form class="form" novalidate [formGroup]="form" (ngSubmit)="submit()">
+    <app-email-field
+      inputId="sign-in-email"
+      label="auth.signIn.email"
+      hint="auth.signIn.emailHint"
+      autocomplete="username"
+      [control]="form.controls.email"
+    />
+    <app-text-field
+      inputId="sign-in-password"
+      type="password"
+      label="auth.signIn.password"
+      autocomplete="current-password"
+      [control]="form.controls.password"
+    />
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn--primary" [disabled]="submitting()" [attr.aria-busy]="submitting()">
+        {{ (submitting() ? 'auth.signIn.submitting' : 'auth.signIn.submit') | translate }}
+      </button>
+      <a routerLink="/auth/recuperar-senha">{{ 'auth.signIn.forgotPassword' | translate }}</a>
+    </div>
+  </form>
+</section>
