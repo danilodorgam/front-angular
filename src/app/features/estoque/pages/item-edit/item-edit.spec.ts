@@ -5,8 +5,8 @@ import { of, throwError } from 'rxjs';
 import { loadTranslations, provideTestEnvironment, typeInto } from '@testing/test-helpers';
 import { toAppError } from '@core/error-handling/http-error.mapper';
 import { NotificationService } from '@core/error-handling/notification.service';
-import { InventoryItem } from '../data-access/inventory.models';
-import { InventoryService } from '../data-access/inventory.service';
+import { InventoryItem } from '../../data-access/inventory.models';
+import { InventoryService } from '../../data-access/inventory.service';
 import { ItemEdit } from './item-edit';
 
 const SAVED: InventoryItem = {

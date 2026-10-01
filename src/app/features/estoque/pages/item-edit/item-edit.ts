@@ -15,8 +15,8 @@ import {
   TextareaField,
 } from '@shared/forms';
 import { AppValidators } from '@shared/validation/validators/app-validators';
-import { InventoryItemInput } from '../data-access/inventory.models';
-import { InventoryService } from '../data-access/inventory.service';
+import { InventoryItemInput } from '../../data-access/inventory.models';
+import { InventoryService } from '../../data-access/inventory.service';
 
 /** Cadastro (`/estoque/novo`) e edição (`/estoque/:id/editar`) de itens. */
 @Component({

@@ -6,7 +6,7 @@ import { isAppError } from '@core/error-handling/app-error';
 import { TranslatePipe } from '@core/localization/translate.pipe';
 import { EmailField, FormErrorSummary, SummaryField, TextField } from '@shared/forms';
 import { AppValidators } from '@shared/validation/validators/app-validators';
-import { AuthService } from '../data-access/auth.service';
+import { AuthService } from '../../data-access/auth.service';
 
 @Component({
   selector: 'app-sign-in',

@@ -6,8 +6,8 @@ import { finalize } from 'rxjs';
 import { NotificationService } from '@core/error-handling/notification.service';
 import { TranslatePipe } from '@core/localization/translate.pipe';
 import { TranslationService } from '@core/localization/translation.service';
-import { InventoryItem, isLowStock } from '../data-access/inventory.models';
-import { InventoryService } from '../data-access/inventory.service';
+import { InventoryItem, isLowStock } from '../../data-access/inventory.models';
+import { InventoryService } from '../../data-access/inventory.service';
 
 @Component({
   selector: 'app-item-detail',

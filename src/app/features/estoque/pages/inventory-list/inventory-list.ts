@@ -7,8 +7,8 @@ import { finalize } from 'rxjs';
 import { TranslatePipe } from '@core/localization/translate.pipe';
 import { TranslationService } from '@core/localization/translation.service';
 import { TextField } from '@shared/forms';
-import { InventoryItem, isLowStock } from '../data-access/inventory.models';
-import { InventoryService } from '../data-access/inventory.service';
+import { InventoryItem, isLowStock } from '../../data-access/inventory.models';
+import { InventoryService } from '../../data-access/inventory.service';
 
 @Component({
   selector: 'app-inventory-list',

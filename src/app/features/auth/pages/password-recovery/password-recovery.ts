@@ -5,7 +5,7 @@ import { finalize } from 'rxjs';
 import { TranslatePipe } from '@core/localization/translate.pipe';
 import { EmailField, FormErrorSummary, SummaryField } from '@shared/forms';
 import { AppValidators } from '@shared/validation/validators/app-validators';
-import { AuthService } from '../data-access/auth.service';
+import { AuthService } from '../../data-access/auth.service';
 
 @Component({
   selector: 'app-password-recovery',
