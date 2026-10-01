@@ -21,7 +21,7 @@ import { decimalSeparatorFor, formatNumeric, parseNumeric, sanitizeNumeric } fro
         class="field__input field__input--number"
         type="text"
         autocomplete="off"
-        [attr.inputmode]="allowDecimal() ? 'decimal' : 'numeric'"
+        [attr.inputmode]="inputMode()"
         [id]="inputId()"
         [value]="displayValue()"
         [attr.maxlength]="maxlength()"
@@ -39,7 +39,22 @@ export class NumberField extends BaseField<number | null> {
   private readonly translation = inject(TranslationService);
 
   readonly allowDecimal = input(false);
+  /** Aceita valores negativos (o "-" só é aceito no início). */
+  readonly allowNegative = input(false);
+  /** Limite de casas decimais (ex.: 2 para dinheiro). Ao sair do campo, o valor é exibido com essa precisão. */
+  readonly decimalPlaces = input<number | null>(null);
   readonly maxlength = input(15);
+
+  /**
+   * Teclado no celular. Os teclados "numeric"/"decimal" do iOS não têm o sinal de menos,
+   * então campos que aceitam negativos usam o teclado de texto.
+   */
+  protected readonly inputMode = computed(() => {
+    if (this.allowNegative()) {
+      return 'text';
+    }
+    return this.allowDecimal() ? 'decimal' : 'numeric';
+  });
 
   /** Texto enquanto o usuário digita (ex.: "12," ainda não é um número completo). */
   private readonly draft = signal<string | null>(null);
@@ -47,12 +62,20 @@ export class NumberField extends BaseField<number | null> {
   protected readonly displayValue = computed(
     () =>
       this.draft() ??
-      formatNumeric(this.state().value, decimalSeparatorFor(this.translation.language())),
+      formatNumeric(
+        this.state().value,
+        decimalSeparatorFor(this.translation.language()),
+        this.allowDecimal() ? this.decimalPlaces() : null,
+      ),
   );
 
   protected onInput(event: Event): void {
     const element = event.target as HTMLInputElement;
-    const sanitized = sanitizeNumeric(element.value, this.allowDecimal());
+    const sanitized = sanitizeNumeric(element.value, {
+      allowDecimal: this.allowDecimal(),
+      allowNegative: this.allowNegative(),
+      decimalPlaces: this.decimalPlaces(),
+    });
     if (sanitized !== element.value) {
       element.value = sanitized;
     }

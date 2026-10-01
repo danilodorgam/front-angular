@@ -2,7 +2,11 @@
   "errorPrefix": "Error:",
   "required": "Enter the {{field}}.",
   "email": "Enter a valid email address, for example: name@example.gov.",
-  "numeric": "{{field}} accepts whole numbers only.",
+  "numeric": {
+    "integer": "{{field}} accepts whole numbers only.",
+    "decimal": "{{field}} accepts numbers only, with a dot for decimals."
+  },
+  "decimalPlaces": "{{field}} accepts at most {{max}} decimal places.",
   "minlength": "{{field}} must be at least {{requiredLength}} characters.",
   "maxlength": "{{field}} must be at most {{requiredLength}} characters.",
   "min": "{{field}} must be greater than or equal to {{min}}.",

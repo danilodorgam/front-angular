@@ -6,12 +6,17 @@ export interface ValidationMessage {
   readonly params: Record<string, unknown>;
 }
 
+/** Chave fixa ou escolhida a partir dos parâmetros do erro. */
+type MessageKey = string | ((params: Record<string, unknown>) => string);
+
 /** Erro do validador → chave de tradução em `src/i18n/<idioma>/validation.json`. */
-const MESSAGE_KEYS: Readonly<Record<string, string>> = {
+const MESSAGE_KEYS: Readonly<Record<string, MessageKey>> = {
   required: 'validation.required',
   notBlank: 'validation.required',
   email: 'validation.email',
-  numeric: 'validation.numeric',
+  numeric: (params) =>
+    params['allowDecimal'] ? 'validation.numeric.decimal' : 'validation.numeric.integer',
+  decimalPlaces: 'validation.decimalPlaces',
   minlength: 'validation.minlength',
   maxlength: 'validation.maxlength',
   min: 'validation.min',
@@ -40,7 +45,8 @@ export function mapValidationError(
       : typeof value === 'object' && value !== null
         ? { ...value }
         : {};
-  return { key: MESSAGE_KEYS[errorKey] ?? 'validation.invalid', params };
+  const messageKey = MESSAGE_KEYS[errorKey] ?? 'validation.invalid';
+  return { key: typeof messageKey === 'function' ? messageKey(params) : messageKey, params };
 }
 
 /**

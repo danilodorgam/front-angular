@@ -26,6 +26,15 @@ describe('mapValidationError', () => {
     });
   });
 
+  it('escolhe a mensagem de número inteiro ou decimal', () => {
+    expect(mapValidationError({ numeric: { allowDecimal: false } })?.key).toBe(
+      'validation.numeric.integer',
+    );
+    expect(mapValidationError({ numeric: { allowDecimal: true } })?.key).toBe(
+      'validation.numeric.decimal',
+    );
+  });
+
   it('usa mensagem genérica para validadores desconhecidos', () => {
     expect(mapValidationError({ cpf: true })?.key).toBe('validation.invalid');
   });
@@ -47,6 +56,20 @@ describe('translateValidationError', () => {
         'estoque.fields.quantity',
       ),
     ).toBe('O campo Quantidade deve ser maior ou igual a 0.');
+    expect(
+      translateValidationError(
+        translation,
+        { numeric: { allowDecimal: true } },
+        'estoque.fields.unitPrice',
+      ),
+    ).toBe('O campo Preço unitário (R$) aceita somente números, com vírgula para os decimais.');
+    expect(
+      translateValidationError(
+        translation,
+        { decimalPlaces: { max: 2, actual: 3 } },
+        'estoque.fields.unitPrice',
+      ),
+    ).toBe('O campo Preço unitário (R$) aceita no máximo 2 casas decimais.');
   });
 
   it('traduz mensagens do servidor enviadas como chave', async () => {

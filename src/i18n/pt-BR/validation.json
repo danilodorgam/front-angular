@@ -2,7 +2,11 @@
   "errorPrefix": "Erro:",
   "required": "Preencha o campo {{field}}.",
   "email": "Informe um e-mail válido, por exemplo: nome@exemplo.gov.br.",
-  "numeric": "O campo {{field}} aceita somente números inteiros.",
+  "numeric": {
+    "integer": "O campo {{field}} aceita somente números inteiros.",
+    "decimal": "O campo {{field}} aceita somente números, com vírgula para os decimais."
+  },
+  "decimalPlaces": "O campo {{field}} aceita no máximo {{max}} casas decimais.",
   "minlength": "O campo {{field}} deve ter pelo menos {{requiredLength}} caracteres.",
   "maxlength": "O campo {{field}} deve ter no máximo {{requiredLength}} caracteres.",
   "min": "O campo {{field}} deve ser maior ou igual a {{min}}.",

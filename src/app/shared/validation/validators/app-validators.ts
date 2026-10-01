@@ -30,10 +30,17 @@ function email(control: AbstractControl): ValidationErrors | null {
 
 export interface NumericOptions {
   readonly allowDecimal?: boolean;
+  /** Máximo de casas decimais (só faz sentido com `allowDecimal`). */
+  readonly decimalPlaces?: number;
 }
 
+/**
+ * Valida o formato numérico. O sinal e os limites ficam com `Validators.min`/`Validators.max`.
+ * Erros: `{ numeric: { allowDecimal } }` ou `{ decimalPlaces: { max, actual } }`.
+ */
 function numeric(options: NumericOptions = {}): ValidatorFn {
   const allowDecimal = options.allowDecimal ?? false;
+  const maxDecimals = options.decimalPlaces;
   return (control: AbstractControl): ValidationErrors | null => {
     const { value } = control;
     if (isEmpty(value)) {
@@ -43,8 +50,23 @@ function numeric(options: NumericOptions = {}): ValidatorFn {
       typeof value === 'number'
         ? Number.isFinite(value) && (allowDecimal || Number.isInteger(value))
         : (allowDecimal ? DECIMAL_PATTERN : INTEGER_PATTERN).test(String(value));
-    return valid ? null : { numeric: { allowDecimal } };
+    if (!valid) {
+      return { numeric: { allowDecimal } };
+    }
+    if (allowDecimal && maxDecimals !== undefined) {
+      const actual = countDecimals(value as number | string);
+      if (actual > maxDecimals) {
+        return { decimalPlaces: { max: maxDecimals, actual } };
+      }
+    }
+    return null;
   };
+}
+
+function countDecimals(value: number | string): number {
+  const text = typeof value === 'number' ? String(value) : value.replace(',', '.');
+  const [, decimals = ''] = text.split('.');
+  return decimals.length;
 }
 
 /** Validadores reutilizáveis, sem regra de negócio. Use junto com os do Angular. */

@@ -130,6 +130,6 @@ describe('ItemEdit', () => {
     expect(inventory.getById).toHaveBeenCalledWith('42');
     expect(root.querySelector('h1')?.textContent).toContain('Editar item');
     expect(input('#item-name').value).toBe('Papel A4');
-    expect(input('#item-unit-price').value).toBe('25,5');
+    expect(input('#item-unit-price').value).toBe('25,50');
   });
 });

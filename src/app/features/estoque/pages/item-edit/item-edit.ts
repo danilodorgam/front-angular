@@ -78,7 +78,7 @@ export class ItemEdit implements OnInit {
     unitPrice: this.fb.control<number | null>(null, [
       Validators.required,
       Validators.min(0),
-      AppValidators.numeric({ allowDecimal: true }),
+      AppValidators.numeric({ allowDecimal: true, decimalPlaces: 2 }),
     ]),
     supplierEmail: ['', [AppValidators.email]],
     description: ['', [Validators.maxLength(500)]],

@@ -58,6 +58,14 @@ describe('AppValidators', () => {
       expect(decimal(new FormControl('1.5'))).toBeNull();
     });
 
+    it('valida o limite de casas decimais', () => {
+      const money = AppValidators.numeric({ allowDecimal: true, decimalPlaces: 2 });
+
+      expect(money(new FormControl(12.34))).toBeNull();
+      expect(money(new FormControl('12,3'))).toBeNull();
+      expect(money(new FormControl(12.345))).toEqual({ decimalPlaces: { max: 2, actual: 3 } });
+    });
+
     it('rejeita textos não numéricos', () => {
       expect(decimal(new FormControl('abc'))).toEqual({ numeric: { allowDecimal: true } });
       expect(decimal(new FormControl(Number.NaN))).toEqual({ numeric: { allowDecimal: true } });
