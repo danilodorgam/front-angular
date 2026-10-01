@@ -57,6 +57,31 @@ describe('AppValidators', () => {
     });
   });
 
+  describe('letters', () => {
+    it.each(['José', 'Maria da Conceição', "Ana D'Ávila-Souza", 'Zoë'])('aceita %s', (value) => {
+      expect(AppValidators.letters(new FormControl(value))).toBeNull();
+    });
+
+    it.each(['João 2', 'ana@silva', 'R2-D2'])('rejeita %s', (value) => {
+      expect(AppValidators.letters(new FormControl(value))).toEqual({ letters: true });
+    });
+  });
+
+  describe('alphanumeric e digits', () => {
+    it('alphanumeric aceita letras, números e espaço', () => {
+      expect(AppValidators.alphanumeric(new FormControl('Sala 12B'))).toBeNull();
+      expect(AppValidators.alphanumeric(new FormControl('Sala-12'))).toEqual({
+        alphanumeric: true,
+      });
+    });
+
+    it('digits aceita somente 0-9', () => {
+      expect(AppValidators.digits(new FormControl('00123'))).toBeNull();
+      expect(AppValidators.digits(new FormControl('12.3'))).toEqual({ digits: true });
+      expect(AppValidators.digits(new FormControl(''))).toBeNull();
+    });
+  });
+
   describe('numeric', () => {
     const integer = AppValidators.numeric();
     const decimal = AppValidators.numeric({ allowDecimal: true });

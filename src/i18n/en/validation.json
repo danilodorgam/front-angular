@@ -7,6 +7,9 @@
     "decimal": "{{field}} accepts numbers only, with a dot for decimals."
   },
   "decimalPlaces": "{{field}} accepts at most {{max}} decimal places.",
+  "letters": "{{field}} accepts only letters, spaces, apostrophes and hyphens.",
+  "alphanumeric": "{{field}} accepts only letters, numbers and spaces.",
+  "digits": "{{field}} accepts only digits from 0 to 9.",
   "minlength": "{{field}} must be at least {{requiredLength}} characters.",
   "maxlength": "{{field}} must be at most {{requiredLength}} characters.",
   "min": "{{field}} must be greater than or equal to {{min}}.",

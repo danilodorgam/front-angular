@@ -89,6 +89,14 @@ describe('translateValidationError', () => {
     ).toBe('O campo Nome é inválido.');
   });
 
+  it('encontra mensagens pela convenção (ex.: letters)', async () => {
+    const translation = await loadTranslations('pt-BR');
+
+    expect(translateValidationError(translation, { letters: true }, 'estoque.fields.name')).toBe(
+      'O campo Nome aceita somente letras, espaço, apóstrofo e hífen.',
+    );
+  });
+
   it('usa a mensagem própria do AppValidators.pattern', async () => {
     const translation = await loadTranslations('pt-BR');
     const errors = { pattern: { requiredPattern: '^a$', messageKey: 'estoque.validation.sku' } };

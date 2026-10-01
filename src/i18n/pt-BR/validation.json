@@ -7,6 +7,9 @@
     "decimal": "O campo {{field}} aceita somente números, com vírgula para os decimais."
   },
   "decimalPlaces": "O campo {{field}} aceita no máximo {{max}} casas decimais.",
+  "letters": "O campo {{field}} aceita somente letras, espaço, apóstrofo e hífen.",
+  "alphanumeric": "O campo {{field}} aceita somente letras, números e espaço.",
+  "digits": "O campo {{field}} aceita somente dígitos de 0 a 9.",
   "minlength": "O campo {{field}} deve ter pelo menos {{requiredLength}} caracteres.",
   "maxlength": "O campo {{field}} deve ter no máximo {{requiredLength}} caracteres.",
   "min": "O campo {{field}} deve ser maior ou igual a {{min}}.",

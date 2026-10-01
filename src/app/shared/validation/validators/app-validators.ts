@@ -1,4 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { CHARSETS } from '../charsets';
 
 /**
  * Mais restritivo que `Validators.email` do Angular, que aceita "a@b" (sem domínio).
@@ -82,5 +83,32 @@ function pattern(regex: RegExp | string, messageKey: string): ValidatorFn {
   };
 }
 
+/**
+ * Valida o conjunto de caracteres (mesmas regras do `charset` do TextField).
+ * Erro com o nome do conjunto: `{ letters: true }`, `{ alphanumeric: true }` ou `{ digits: true }`;
+ * a mensagem segue a convenção `validation.<erro>`.
+ */
+function charsetValidator(charset: keyof typeof CHARSETS): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const { value } = control;
+    if (isEmpty(value)) {
+      return null;
+    }
+    return CHARSETS[charset].accept.test(String(value)) ? null : { [charset]: true };
+  };
+}
+
+const letters = charsetValidator('letters');
+const alphanumeric = charsetValidator('alphanumeric');
+const digits = charsetValidator('digits');
+
 /** Validadores reutilizáveis, sem regra de negócio. Use junto com os do Angular. */
-export const AppValidators = { notBlank, email, numeric, pattern } as const;
+export const AppValidators = {
+  notBlank,
+  email,
+  numeric,
+  pattern,
+  letters,
+  alphanumeric,
+  digits,
+} as const;

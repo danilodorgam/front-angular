@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { TextCharset } from '@shared/validation/charsets';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, Validators } from '@angular/forms';
 import { blur, loadTranslations, provideTestEnvironment, typeInto } from '@testing/test-helpers';
@@ -10,18 +11,21 @@ import { TextField } from './text-field';
     inputId="nome"
     label="estoque.fields.name"
     hint="estoque.hints.sku"
+    [charset]="charset()"
     [control]="control"
   />`,
 })
 class Host {
+  readonly charset = signal<TextCharset>('any');
   control = new FormControl('', { nonNullable: true, validators: [Validators.required] });
 }
 
 describe('TextField', () => {
-  async function setup() {
+  async function setup(charset: TextCharset = 'any') {
     TestBed.configureTestingModule({ providers: [provideTestEnvironment()] });
     await loadTranslations();
     const fixture = TestBed.createComponent(Host);
+    fixture.componentInstance.charset.set(charset);
     await fixture.whenStable();
     const root = fixture.nativeElement as HTMLElement;
     return {
@@ -81,6 +85,33 @@ describe('TextField', () => {
     expect(control.value).toBe('Papel A4');
     expect(control.dirty).toBe(true);
     expect(root.querySelector('.field--invalid')).toBeNull();
+  });
+
+  it('charset="letters" descarta números e símbolos, mantendo acentos', async () => {
+    const { input, control } = await setup('letters');
+
+    typeInto(input, "Ana D'Ávila-Souza 2@");
+
+    expect(input.value).toBe("Ana D'Ávila-Souza ");
+    expect(control.value).toBe("Ana D'Ávila-Souza ");
+  });
+
+  it('charset="digits" aceita só dígitos e abre o teclado numérico', async () => {
+    const { input, control } = await setup('digits');
+
+    expect(input.getAttribute('inputmode')).toBe('numeric');
+    typeInto(input, '12a-3');
+
+    expect(control.value).toBe('123');
+  });
+
+  it('sem charset aceita qualquer caractere', async () => {
+    const { input, control } = await setup();
+
+    expect(input.hasAttribute('inputmode')).toBe(false);
+    typeInto(input, 'Sala 3 #2');
+
+    expect(control.value).toBe('Sala 3 #2');
   });
 
   it('reflete valores definidos pelo código (patchValue)', async () => {
