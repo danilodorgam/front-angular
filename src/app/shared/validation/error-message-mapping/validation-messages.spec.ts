@@ -97,6 +97,14 @@ describe('translateValidationError', () => {
     );
   });
 
+  it('traduz os erros dos validadores brasileiros', async () => {
+    const translation = await loadTranslations('pt-BR');
+
+    expect(translateValidationError(translation, { cpf: true }, 'estoque.fields.name')).toBe(
+      'Informe um CPF válido no campo Nome.',
+    );
+  });
+
   it('usa a mensagem própria do AppValidators.pattern', async () => {
     const translation = await loadTranslations('pt-BR');
     const errors = { pattern: { requiredPattern: '^a$', messageKey: 'estoque.validation.sku' } };

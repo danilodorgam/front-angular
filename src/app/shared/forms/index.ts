@@ -4,3 +4,4 @@ export { FormErrorSummary, type SummaryField } from './form-error-summary/form-e
 export { NumberField } from './number-field/number-field';
 export { TextField } from './text-field/text-field';
 export { TextareaField } from './textarea-field/textarea-field';
+export { applyMask, MASKS, unmask, type MaskPattern } from './mask/mask';
