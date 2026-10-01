@@ -52,11 +52,11 @@ src/
 Todos os arquivos `src/environments/environment*.ts` implementam a interface `AppEnvironment`, então um campo
 esquecido vira erro de compilação. O Angular CLI troca o arquivo no build (`fileReplacements` no `angular.json`):
 
-| Configuração    | Arquivo                          | Comando             |
-| --------------- | -------------------------------- | ------------------- |
-| `development`   | `environment.development.ts`     | `npm start`         |
-| `homologacao`   | `environment.homologacao.ts`     | `npm run build:hmg` |
-| `production`    | `environment.ts`                 | `npm run build`     |
+| Configuração  | Arquivo                      | Comando             |
+| ------------- | ---------------------------- | ------------------- |
+| `development` | `environment.development.ts` | `npm start`         |
+| `homologacao` | `environment.homologacao.ts` | `npm run build:hmg` |
+| `production`  | `environment.ts`             | `npm run build`     |
 
 Nos serviços, use `inject(APP_ENVIRONMENT)` em vez de importar o arquivo, assim os testes podem sobrescrever a
 configuração. Para criar um novo ambiente: copie um arquivo, adicione a configuração em `angular.json` e um script
@@ -64,18 +64,18 @@ em `package.json`.
 
 ## Acessibilidade (e-MAG)
 
-| Recurso                                                            | Onde                                    |
-| ------------------------------------------------------------------ | --------------------------------------- |
-| Atalhos Alt+1 (conteúdo), Alt+2 (menu), Alt+4 (rodapé)             | `core/accessibility/accessibility-bar`  |
-| Alto contraste e ajuste de fonte (salvos no navegador)             | `AccessibilityService`                  |
-| `lang` do `<html>` atualizado ao trocar idioma                     | `TranslationService`                    |
-| Título descritivo por página + anúncio de navegação para leitores | `AppTitleStrategy`, `LiveAnnouncer`     |
-| Foco movido para o conteúdo após navegar                           | `Shell`                                 |
-| Label associado, dica e erro via `aria-describedby`, `aria-invalid`| `shared/forms/base-field.ts`            |
-| Erro não depende só da cor (borda + ícone + texto)                 | `assets/styles/_forms.scss`             |
-| Resumo de erros focado com links para os campos                    | `FormErrorSummary`                      |
-| Mensagens de erro não somem sozinhas                               | `NotificationService`                   |
-| Página "Acessibilidade" descrevendo os recursos                    | `/acessibilidade`                       |
+| Recurso                                                             | Onde                                   |
+| ------------------------------------------------------------------- | -------------------------------------- |
+| Atalhos Alt+1 (conteúdo), Alt+2 (menu), Alt+4 (rodapé)              | `core/accessibility/accessibility-bar` |
+| Alto contraste e ajuste de fonte (salvos no navegador)              | `AccessibilityService`                 |
+| `lang` do `<html>` atualizado ao trocar idioma                      | `TranslationService`                   |
+| Título descritivo por página + anúncio de navegação para leitores   | `AppTitleStrategy`, `LiveAnnouncer`    |
+| Foco movido para o conteúdo após navegar                            | `Shell`                                |
+| Label associado, dica e erro via `aria-describedby`, `aria-invalid` | `shared/forms/base-field.ts`           |
+| Erro não depende só da cor (borda + ícone + texto)                  | `assets/styles/_forms.scss`            |
+| Resumo de erros focado com links para os campos                     | `FormErrorSummary`                     |
+| Mensagens de erro não somem sozinhas                                | `NotificationService`                  |
+| Página "Acessibilidade" descrevendo os recursos                     | `/acessibilidade`                      |
 
 ## Formulários
 
@@ -90,7 +90,11 @@ form = this.fb.group({
 
 ```html
 <app-email-field inputId="email" label="auth.signIn.email" [control]="form.controls.email" />
-<app-number-field inputId="qtd" label="estoque.fields.quantity" [control]="form.controls.quantity" />
+<app-number-field
+  inputId="qtd"
+  label="estoque.fields.quantity"
+  [control]="form.controls.quantity"
+/>
 ```
 
 O `label`/`hint` são chaves de tradução. O erro aparece quando o usuário sai do campo ou quando o formulário chama
@@ -103,3 +107,39 @@ O `label`/`hint` são chaves de tradução. O erro aparece quando o usuário sai
 - Telas que tratam um status sozinhas declaram isso com `handledErrors(404)` no `HttpContext`.
 - Erros de validação do backend (`{ "errors": { "campo": "mensagem" } }`) aparecem no próprio campo.
 - `GlobalErrorHandler` captura exceções não tratadas.
+
+## Design system
+
+A identidade visual está definida em [`DESIGN.md`](DESIGN.md) (formato
+[Google DESIGN.md](https://github.com/google-labs-code/design.md): tokens normativos em YAML +
+racional em prosa). Os mesmos valores vivem como custom properties em
+`src/assets/styles/_tokens.scss` — cor, tipografia, espaçamento, raio, sombra, z-index e tamanhos
+de toque. **Nenhum componente declara cor, tamanho de fonte ou sombra diretamente**; o Stylelint
+bloqueia hex/`rgb()` fora de `_tokens.scss` e exige classes no padrão BEM.
+
+```bash
+npm run lint:style     # Stylelint (tokens, BEM, SCSS)
+npm run design:lint    # valida DESIGN.md: referências, ordem das seções e contraste WCAG
+npm run design:export  # exporta tokens no formato W3C DTCG (design-tokens.json)
+```
+
+Ao mudar um valor: edite `DESIGN.md` → espelhe em `_tokens.scss` → `npm run design:lint`.
+
+## Pipeline
+
+`npm run ci` reproduz localmente o que o GitHub Actions roda em cada PR (`.github/workflows/ci.yml`):
+
+| Job       | O que verifica                                                                       |
+| --------- | ------------------------------------------------------------------------------------ |
+| `quality` | Prettier, ESLint (se existir), Stylelint, lint do `DESIGN.md`                        |
+| `test`    | Vitest com cobertura (artefato `coverage/`)                                          |
+| `build`   | Build `production` e `homologacao`; falha se a credencial do mock aparecer no bundle |
+| `audit`   | `npm audit` de dependências de produção (nível `high`)                               |
+
+Marque os três primeiros como _required status checks_ na proteção da branch `main`.
+
+**Homologação (stg):** `.github/workflows/deploy-stg.yml` publica o build `homologacao` no GitHub
+Pages a cada push na `main` (environment `staging`, com URL no PR). Ative em _Settings → Pages →
+Source: GitHub Actions_. Para outra hospedagem, troque só o job `deploy`; o artefato já sai pronto.
+
+Dependabot abre PRs semanais agrupando `@angular/*` e ferramentas de dev.
