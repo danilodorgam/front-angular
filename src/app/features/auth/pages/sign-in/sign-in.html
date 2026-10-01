@@ -3,7 +3,7 @@
   <p>{{ 'auth.signIn.intro' | translate }}</p>
   <p class="text-muted">{{ 'common.requiredFieldsNotice' | translate }}</p>
 
-  <app-form-error-summary [form]="form" [fields]="fields" [submitAttempt]="submitAttempt()" />
+  <app-form-error-summary [form]="form" [submitAttempt]="submitAttempt()" />
 
   @if (errorKey(); as key) {
     <div class="alert alert--error" role="alert">{{ key | translate }}</div>

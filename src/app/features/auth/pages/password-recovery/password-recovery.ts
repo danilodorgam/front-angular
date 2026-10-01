@@ -3,7 +3,7 @@ import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angula
 import { RouterLink } from '@angular/router';
 import { finalize } from 'rxjs';
 import { TranslatePipe } from '@core/localization/translate.pipe';
-import { EmailField, FormErrorSummary, SummaryField } from '@shared/forms';
+import { EmailField, FormErrorSummary } from '@shared/forms';
 import { AppValidators } from '@shared/validation/validators/app-validators';
 import { AuthService } from '../../data-access/auth.service';
 
@@ -19,10 +19,6 @@ export class PasswordRecovery {
   protected readonly form = inject(NonNullableFormBuilder).group({
     email: ['', [Validators.required, AppValidators.email]],
   });
-
-  protected readonly fields: readonly SummaryField[] = [
-    { name: 'email', inputId: 'recovery-email', label: 'auth.passwordRecovery.email' },
-  ];
 
   protected readonly submitAttempt = signal(0);
   protected readonly submitting = signal(false);

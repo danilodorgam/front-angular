@@ -17,7 +17,12 @@ import { TranslatePipe } from '@core/localization/translate.pipe';
 import { TranslationService } from '@core/localization/translation.service';
 import { uniqueId } from '@shared/utils/unique-id';
 import { translateValidationError } from '@shared/validation/error-message-mapping/validation-messages';
+import { FormFieldRegistry } from '../form-field-registry';
 
+/**
+ * Declaração manual de campo, só necessária para controles que não herdam de `BaseField`
+ * (os campos compartilhados se registram sozinhos no `FormFieldRegistry`).
+ */
 export interface SummaryField {
   /** Nome do controle no FormGroup. */
   readonly name: string;
@@ -36,6 +41,10 @@ interface SummaryError {
  * Resumo de erros exibido no topo do formulário após uma tentativa de envio.
  * Recebe o foco automaticamente e cada item é um link para o campo com problema
  * (e-MAG 6.5 – identificar e descrever erros de entrada de dados).
+ *
+ * Uso: `<app-form-error-summary [form]="form" [submitAttempt]="submitAttempt()" />`.
+ * Os campos (`app-text-field`, `app-email-field`...) ligados a esse formulário aparecem
+ * automaticamente, na ordem da tela, com o rótulo e o id declarados no próprio campo.
  */
 @Component({
   selector: 'app-form-error-summary',
@@ -46,9 +55,11 @@ interface SummaryError {
 export class FormErrorSummary {
   private readonly translation = inject(TranslationService);
   private readonly injector = inject(Injector);
+  private readonly registry = inject(FormFieldRegistry);
 
   readonly form = input.required<AbstractControl>();
-  readonly fields = input.required<readonly SummaryField[]>();
+  /** Opcional: substitui os campos registrados automaticamente. */
+  readonly fields = input<readonly SummaryField[] | null>(null);
   /** Incrementado pelo formulário a cada envio; o resumo só aparece depois do primeiro. */
   readonly submitAttempt = input(0);
 
@@ -56,16 +67,21 @@ export class FormErrorSummary {
   private readonly container = viewChild<ElementRef<HTMLElement>>('container');
   private readonly version = signal(0);
 
+  private readonly registeredFields = computed(() => this.registry.fieldsOf(this.form())());
+
   protected readonly errors = computed<SummaryError[]>(() => {
     this.version();
     const form = this.form();
-    return this.fields().flatMap((field) => {
-      const control = form.get(field.name);
+    const manual = this.fields();
+    const fields = manual
+      ? manual.map((field) => ({ ...field, control: form.get(field.name) }))
+      : this.registeredFields();
+    return fields.flatMap(({ control, inputId, label }) => {
       if (!control || control.valid || control.disabled) {
         return [];
       }
-      const message = translateValidationError(this.translation, control.errors, field.label);
-      return message ? [{ inputId: field.inputId, message }] : [];
+      const message = translateValidationError(this.translation, control.errors, label);
+      return message ? [{ inputId, message }] : [];
     });
   });
 

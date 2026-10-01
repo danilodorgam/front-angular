@@ -15,14 +15,7 @@ import { finalize } from 'rxjs';
 import { isAppError } from '@core/error-handling/app-error';
 import { NotificationService } from '@core/error-handling/notification.service';
 import { TranslatePipe } from '@core/localization/translate.pipe';
-import {
-  EmailField,
-  FormErrorSummary,
-  NumberField,
-  SummaryField,
-  TextField,
-  TextareaField,
-} from '@shared/forms';
+import { EmailField, FormErrorSummary, NumberField, TextField, TextareaField } from '@shared/forms';
 import { AppValidators } from '@shared/validation/validators/app-validators';
 import { InventoryItemInput } from '../../data-access/inventory.models';
 import { InventoryService } from '../../data-access/inventory.service';
@@ -83,20 +76,6 @@ export class ItemEdit implements OnInit {
     supplierEmail: ['', [AppValidators.email]],
     description: ['', [Validators.maxLength(500)]],
   });
-
-  protected readonly fields: readonly SummaryField[] = [
-    { name: 'sku', inputId: 'item-sku', label: 'estoque.fields.sku' },
-    { name: 'name', inputId: 'item-name', label: 'estoque.fields.name' },
-    { name: 'quantity', inputId: 'item-quantity', label: 'estoque.fields.quantity' },
-    { name: 'minimumStock', inputId: 'item-minimum-stock', label: 'estoque.fields.minimumStock' },
-    { name: 'unitPrice', inputId: 'item-unit-price', label: 'estoque.fields.unitPrice' },
-    {
-      name: 'supplierEmail',
-      inputId: 'item-supplier-email',
-      label: 'estoque.fields.supplierEmail',
-    },
-    { name: 'description', inputId: 'item-description', label: 'estoque.fields.description' },
-  ];
 
   protected readonly submitAttempt = signal(0);
   protected readonly loading = signal(false);
