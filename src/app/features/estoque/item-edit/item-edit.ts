@@ -3,9 +3,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { finalize } from 'rxjs';
-import { isAppError } from '../../../core/error-handling/app-error';
-import { NotificationService } from '../../../core/error-handling/notification.service';
-import { TranslatePipe } from '../../../core/localization/translate.pipe';
+import { isAppError } from '@core/error-handling/app-error';
+import { NotificationService } from '@core/error-handling/notification.service';
+import { TranslatePipe } from '@core/localization/translate.pipe';
 import {
   EmailField,
   FormErrorSummary,
@@ -13,8 +13,8 @@ import {
   SummaryField,
   TextField,
   TextareaField,
-} from '../../../shared/forms';
-import { AppValidators } from '../../../shared/validation/validators/app-validators';
+} from '@shared/forms';
+import { AppValidators } from '@shared/validation/validators/app-validators';
 import { InventoryItemInput } from '../data-access/inventory.models';
 import { InventoryService } from '../data-access/inventory.service';
 

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Shell } from './core/layout/shell/shell';
+import { Shell } from '@core/layout/shell/shell';
 
 @Component({
   selector: 'app-root',

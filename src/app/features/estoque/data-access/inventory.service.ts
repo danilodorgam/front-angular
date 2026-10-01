@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { APP_ENVIRONMENT } from '../../../../environments/environment.token';
-import { handledErrors } from '../../../core/error-handling/http-context';
+import { APP_ENVIRONMENT } from '@env/environment.token';
+import { handledErrors } from '@core/error-handling/http-context';
 import { InventoryItem, InventoryItemInput } from './inventory.models';
 
 @Injectable({ providedIn: 'root' })

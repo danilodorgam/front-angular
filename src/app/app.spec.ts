@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { loadTranslations, provideTestEnvironment } from '../testing/test-helpers';
+import { loadTranslations, provideTestEnvironment } from '@testing/test-helpers';
 import { App } from './app';
 
 describe('App', () => {

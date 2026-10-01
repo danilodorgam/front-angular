@@ -1,5 +1,5 @@
 import { DOCUMENT, Injectable, computed, inject, signal } from '@angular/core';
-import { readStorage, writeStorage } from '../../shared/utils/safe-storage';
+import { readStorage, writeStorage } from '@shared/utils/safe-storage';
 
 const CONTRAST_KEY = 'app.a11y.highContrast';
 const FONT_SCALE_KEY = 'app.a11y.fontScale';

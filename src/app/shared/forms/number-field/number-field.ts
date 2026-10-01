@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
-import { TranslationService } from '../../../core/localization/translation.service';
+import { TranslationService } from '@core/localization/translation.service';
 import { BaseField } from '../base-field';
 import { FieldFrame } from '../field-frame/field-frame';
 import { decimalSeparatorFor, formatNumeric, parseNumeric, sanitizeNumeric } from './numeric';

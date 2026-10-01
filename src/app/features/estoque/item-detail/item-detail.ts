@@ -3,9 +3,9 @@ import { ChangeDetectionStrategy, Component, DOCUMENT, DestroyRef, OnInit, injec
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterLink } from '@angular/router';
 import { finalize } from 'rxjs';
-import { NotificationService } from '../../../core/error-handling/notification.service';
-import { TranslatePipe } from '../../../core/localization/translate.pipe';
-import { TranslationService } from '../../../core/localization/translation.service';
+import { NotificationService } from '@core/error-handling/notification.service';
+import { TranslatePipe } from '@core/localization/translate.pipe';
+import { TranslationService } from '@core/localization/translation.service';
 import { InventoryItem, isLowStock } from '../data-access/inventory.models';
 import { InventoryService } from '../data-access/inventory.service';
 

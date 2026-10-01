@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { ErrorPage } from './core/error-handling/error-page/error-page';
-import { authGuard } from './features/auth/data-access/auth.guard';
+import { ErrorPage } from '@core/error-handling/error-page/error-page';
+import { authGuard } from '@features/auth/data-access/auth.guard';
 
 /**
  * Rotas de primeiro nível. As features são carregadas sob demanda (lazy loading).
@@ -10,18 +10,18 @@ export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'estoque' },
   {
     path: 'auth',
-    loadChildren: () => import('./features/auth/auth.routes').then((m) => m.AUTH_ROUTES),
+    loadChildren: () => import('@features/auth/auth.routes').then((m) => m.AUTH_ROUTES),
   },
   {
     path: 'estoque',
     canActivate: [authGuard],
-    loadChildren: () => import('./features/estoque/estoque.routes').then((m) => m.ESTOQUE_ROUTES),
+    loadChildren: () => import('@features/estoque/estoque.routes').then((m) => m.ESTOQUE_ROUTES),
   },
   {
     path: 'acessibilidade',
     title: 'accessibility.page.title',
     loadComponent: () =>
-      import('./core/accessibility/accessibility-page/accessibility-page').then((m) => m.AccessibilityPage),
+      import('@core/accessibility/accessibility-page/accessibility-page').then((m) => m.AccessibilityPage),
   },
   {
     path: 'acesso-negado',

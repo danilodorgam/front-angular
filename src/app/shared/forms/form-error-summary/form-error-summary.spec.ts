@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { loadTranslations, provideTestEnvironment } from '../../../../testing/test-helpers';
+import { loadTranslations, provideTestEnvironment } from '@testing/test-helpers';
 import { TextField } from '../text-field/text-field';
 import { FormErrorSummary, SummaryField } from './form-error-summary';
 

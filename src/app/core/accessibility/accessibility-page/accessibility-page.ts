@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TranslatePipe } from '../../localization/translate.pipe';
+import { TranslatePipe } from '@core/localization/translate.pipe';
 
 /** e-MAG: página que descreve os recursos de acessibilidade disponíveis. */
 @Component({

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { TranslatePipe } from '../../../core/localization/translate.pipe';
+import { TranslatePipe } from '@core/localization/translate.pipe';
 import { BaseField } from '../base-field';
 import { FieldFrame } from '../field-frame/field-frame';
 

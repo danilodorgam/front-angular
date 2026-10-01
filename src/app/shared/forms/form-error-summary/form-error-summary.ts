@@ -12,11 +12,11 @@ import {
   viewChild,
 } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { focusElementById } from '../../../core/accessibility/focus';
-import { TranslatePipe } from '../../../core/localization/translate.pipe';
-import { TranslationService } from '../../../core/localization/translation.service';
-import { uniqueId } from '../../utils/unique-id';
-import { translateValidationError } from '../../validation/error-message-mapping/validation-messages';
+import { focusElementById } from '@core/accessibility/focus';
+import { TranslatePipe } from '@core/localization/translate.pipe';
+import { TranslationService } from '@core/localization/translation.service';
+import { uniqueId } from '@shared/utils/unique-id';
+import { translateValidationError } from '@shared/validation/error-message-mapping/validation-messages';
 
 export interface SummaryField {
   /** Nome do controle no FormGroup. */

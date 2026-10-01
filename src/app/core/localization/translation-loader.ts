@@ -9,8 +9,8 @@ export type TranslationLoader = (language: SupportedLanguage) => Promise<Transla
  * do idioma que está usando.
  */
 const BUNDLED_CATALOGS: Record<SupportedLanguage, () => Promise<TranslationCatalog>> = {
-  'pt-BR': () => import('../../../i18n/pt-BR').then((m) => m.default),
-  en: () => import('../../../i18n/en').then((m) => m.default),
+  'pt-BR': () => import('@i18n/pt-BR').then((m) => m.default),
+  en: () => import('@i18n/en').then((m) => m.default),
 };
 
 export const loadBundledCatalog: TranslationLoader = (language) => BUNDLED_CATALOGS[language]();

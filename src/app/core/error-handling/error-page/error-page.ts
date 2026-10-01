@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TranslatePipe } from '../../localization/translate.pipe';
+import { TranslatePipe } from '@core/localization/translate.pipe';
 
 /**
  * Página genérica de erro. O conteúdo vem do `data` da rota

@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { loadTranslations, provideTestEnvironment } from '../../../../testing/test-helpers';
+import { loadTranslations, provideTestEnvironment } from '@testing/test-helpers';
 import { mapValidationError, translateValidationError } from './validation-messages';
 
 describe('mapValidationError', () => {

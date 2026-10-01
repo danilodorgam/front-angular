@@ -1,5 +1,5 @@
 import { ValidationErrors } from '@angular/forms';
-import { TranslationService } from '../../../core/localization/translation.service';
+import { TranslationService } from '@core/localization/translation.service';
 
 export interface ValidationMessage {
   readonly key: string;

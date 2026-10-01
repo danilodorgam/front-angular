@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Title } from '@angular/platform-browser';
 import { provideRouter, Router, TitleStrategy } from '@angular/router';
-import { loadTranslations, provideTestEnvironment } from '../../../testing/test-helpers';
+import { loadTranslations, provideTestEnvironment } from '@testing/test-helpers';
 import { AppTitleStrategy } from './app-title.strategy';
 import { LiveAnnouncer } from './live-announcer.service';
 

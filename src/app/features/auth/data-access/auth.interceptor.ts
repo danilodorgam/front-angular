@@ -2,8 +2,8 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
-import { APP_ENVIRONMENT } from '../../../../environments/environment.token';
-import { isAppError } from '../../../core/error-handling/app-error';
+import { APP_ENVIRONMENT } from '@env/environment.token';
+import { isAppError } from '@core/error-handling/app-error';
 import { AuthService } from './auth.service';
 
 /**

@@ -1,7 +1,7 @@
 import { Injectable, effect, inject, signal } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
-import { TranslationService } from '../localization/translation.service';
+import { TranslationService } from '@core/localization/translation.service';
 import { LiveAnnouncer } from './live-announcer.service';
 
 /**

@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, Validators } from '@angular/forms';
-import { blur, loadTranslations, provideTestEnvironment, typeInto } from '../../../../testing/test-helpers';
+import { blur, loadTranslations, provideTestEnvironment, typeInto } from '@testing/test-helpers';
 import { NumberField } from './number-field';
 
 @Component({

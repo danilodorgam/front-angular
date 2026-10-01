@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { TranslatePipe } from '../../../core/localization/translate.pipe';
-import { TranslationService } from '../../../core/localization/translation.service';
-import { translateValidationError } from '../../validation/error-message-mapping/validation-messages';
+import { TranslatePipe } from '@core/localization/translate.pipe';
+import { TranslationService } from '@core/localization/translation.service';
+import { translateValidationError } from '@shared/validation/error-message-mapping/validation-messages';
 
 /** Mensagem de erro de um campo. O `id` é referenciado pelo `aria-describedby` do input. */
 @Component({

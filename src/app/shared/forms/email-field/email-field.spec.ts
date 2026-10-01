@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, Validators } from '@angular/forms';
-import { blur, loadTranslations, provideTestEnvironment, typeInto } from '../../../../testing/test-helpers';
-import { AppValidators } from '../../validation/validators/app-validators';
+import { blur, loadTranslations, provideTestEnvironment, typeInto } from '@testing/test-helpers';
+import { AppValidators } from '@shared/validation/validators/app-validators';
 import { EmailField } from './email-field';
 
 @Component({

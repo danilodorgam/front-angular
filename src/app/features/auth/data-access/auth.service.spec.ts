@@ -2,8 +2,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
-import { provideTestEnvironment } from '../../../../testing/test-helpers';
-import { HANDLED_ERROR_STATUSES } from '../../../core/error-handling/http-context';
+import { provideTestEnvironment } from '@testing/test-helpers';
+import { HANDLED_ERROR_STATUSES } from '@core/error-handling/http-context';
 import { SignInResponse } from './auth.models';
 import { AuthService } from './auth.service';
 

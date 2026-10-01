@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { finalize } from 'rxjs';
-import { TranslatePipe } from '../../../core/localization/translate.pipe';
-import { EmailField, FormErrorSummary, SummaryField } from '../../../shared/forms';
-import { AppValidators } from '../../../shared/validation/validators/app-validators';
+import { TranslatePipe } from '@core/localization/translate.pipe';
+import { EmailField, FormErrorSummary, SummaryField } from '@shared/forms';
+import { AppValidators } from '@shared/validation/validators/app-validators';
 import { AuthService } from '../data-access/auth.service';
 
 @Component({

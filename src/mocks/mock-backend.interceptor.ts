@@ -7,8 +7,8 @@ import {
 } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Observable, of, switchMap, throwError, timer } from 'rxjs';
-import { APP_ENVIRONMENT } from '../environments/environment.token';
-import type { InventoryItem, InventoryItemInput } from '../app/features/estoque/data-access/inventory.models';
+import { APP_ENVIRONMENT } from '@env/environment.token';
+import type { InventoryItem, InventoryItemInput } from '@features/estoque/data-access/inventory.models';
 import { MOCK_CREDENTIALS, MOCK_ITEMS, MOCK_TOKEN, MOCK_USER } from './mock-data';
 
 const LATENCY_MS = 350;

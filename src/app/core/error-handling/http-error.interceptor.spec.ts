@@ -1,7 +1,7 @@
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { provideTestEnvironment, TEST_ENVIRONMENT } from '../../../testing/test-helpers';
+import { provideTestEnvironment, TEST_ENVIRONMENT } from '@testing/test-helpers';
 import { AppError } from './app-error';
 import { handledErrors } from './http-context';
 import { httpErrorInterceptor } from './http-error.interceptor';

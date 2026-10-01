@@ -1,8 +1,8 @@
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { provideTestEnvironment } from '../../../../testing/test-helpers';
-import { HANDLED_ERROR_STATUSES } from '../../../core/error-handling/http-context';
+import { provideTestEnvironment } from '@testing/test-helpers';
+import { HANDLED_ERROR_STATUSES } from '@core/error-handling/http-context';
 import { InventoryItemInput, isLowStock } from './inventory.models';
 import { InventoryService } from './inventory.service';
 

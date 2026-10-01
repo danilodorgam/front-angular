@@ -2,8 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
-import { loadTranslations, provideTestEnvironment, typeInto } from '../../../../testing/test-helpers';
-import { toAppError } from '../../../core/error-handling/http-error.mapper';
+import { loadTranslations, provideTestEnvironment, typeInto } from '@testing/test-helpers';
+import { toAppError } from '@core/error-handling/http-error.mapper';
 import { AuthService } from '../data-access/auth.service';
 import { SignIn } from './sign-in';
 

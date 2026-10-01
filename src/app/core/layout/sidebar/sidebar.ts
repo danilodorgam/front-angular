@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { LANDMARK_IDS } from '../../accessibility/accessibility-bar/accessibility-bar';
-import { TranslatePipe } from '../../localization/translate.pipe';
+import { LANDMARK_IDS } from '@core/accessibility/accessibility-bar/accessibility-bar';
+import { TranslatePipe } from '@core/localization/translate.pipe';
 import { LAYOUT_SESSION } from '../layout-session';
 import { LayoutService } from '../layout.service';
 import { NAVIGATION_ITEMS } from '../navigation';

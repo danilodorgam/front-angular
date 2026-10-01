@@ -1,6 +1,6 @@
 import { Directive, Signal, computed, effect, input, signal } from '@angular/core';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
-import { uniqueId } from '../utils/unique-id';
+import { uniqueId } from '@shared/utils/unique-id';
 
 export interface FieldState<T> {
   readonly value: T;

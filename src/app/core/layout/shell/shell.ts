@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, Injector, afterNextRender, inject }
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, skip } from 'rxjs';
-import { AccessibilityBar, LANDMARK_IDS } from '../../accessibility/accessibility-bar/accessibility-bar';
-import { focusElementById } from '../../accessibility/focus';
-import { NotificationOutlet } from '../../error-handling/notification-outlet/notification-outlet';
+import { AccessibilityBar, LANDMARK_IDS } from '@core/accessibility/accessibility-bar/accessibility-bar';
+import { focusElementById } from '@core/accessibility/focus';
+import { NotificationOutlet } from '@core/error-handling/notification-outlet/notification-outlet';
 import { Footer } from '../footer/footer';
 import { Header } from '../header/header';
 import { LayoutService } from '../layout.service';

@@ -3,8 +3,8 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { provideTestEnvironment } from '../../../../testing/test-helpers';
-import { httpErrorInterceptor } from '../../../core/error-handling/http-error.interceptor';
+import { provideTestEnvironment } from '@testing/test-helpers';
+import { httpErrorInterceptor } from '@core/error-handling/http-error.interceptor';
 import { authInterceptor } from './auth.interceptor';
 import { AuthService } from './auth.service';
 

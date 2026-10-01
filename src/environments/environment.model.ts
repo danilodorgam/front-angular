@@ -1,4 +1,4 @@
-import type { SupportedLanguage } from '../app/core/localization/language';
+import type { SupportedLanguage } from '@core/localization/language';
 
 export type EnvironmentName = 'development' | 'homologacao' | 'production';
 export type LogLevel = 'debug' | 'info' | 'warn' | 'error' | 'silent';

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { of, throwError } from 'rxjs';
-import { loadTranslations, provideTestEnvironment, typeInto } from '../../../../testing/test-helpers';
+import { loadTranslations, provideTestEnvironment, typeInto } from '@testing/test-helpers';
 import { InventoryItem } from '../data-access/inventory.models';
 import { InventoryService } from '../data-access/inventory.service';
 import { InventoryList } from './inventory-list';
