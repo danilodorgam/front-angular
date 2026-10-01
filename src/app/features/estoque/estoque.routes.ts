@@ -5,21 +5,22 @@ export const ESTOQUE_ROUTES: Routes = [
   {
     path: '',
     title: 'estoque.list.title',
-    loadComponent: () => import('./inventory-list/inventory-list').then((m) => m.InventoryList),
+    loadComponent: () =>
+      import('./pages/inventory-list/inventory-list').then((m) => m.InventoryList),
   },
   {
     path: 'novo',
     title: 'estoque.edit.titleNew',
-    loadComponent: () => import('./item-edit/item-edit').then((m) => m.ItemEdit),
+    loadComponent: () => import('./pages/item-edit/item-edit').then((m) => m.ItemEdit),
   },
   {
     path: ':id',
     title: 'estoque.detail.title',
-    loadComponent: () => import('./item-detail/item-detail').then((m) => m.ItemDetail),
+    loadComponent: () => import('./pages/item-detail/item-detail').then((m) => m.ItemDetail),
   },
   {
     path: ':id/editar',
     title: 'estoque.edit.titleEdit',
-    loadComponent: () => import('./item-edit/item-edit').then((m) => m.ItemEdit),
+    loadComponent: () => import('./pages/item-edit/item-edit').then((m) => m.ItemEdit),
   },
 ];

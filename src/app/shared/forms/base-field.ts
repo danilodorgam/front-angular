@@ -1,6 +1,7 @@
-import { Directive, Signal, computed, effect, input, signal } from '@angular/core';
+import { Directive, Signal, computed, effect, inject, input, signal } from '@angular/core';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
-import { uniqueId } from '../utils/unique-id';
+import { uniqueId } from '@shared/utils/unique-id';
+import { FormFieldRegistry } from './form-field-registry';
 
 export interface FieldState<T> {
   readonly value: T;
@@ -70,6 +71,17 @@ export abstract class BaseField<T> implements FieldView {
     effect((onCleanup) => {
       const subscription = this.control().events.subscribe(() => this.version.update((v) => v + 1));
       onCleanup(() => subscription.unsubscribe());
+    });
+
+    // Torna o campo visível para o FormErrorSummary do mesmo formulário.
+    const registry = inject(FormFieldRegistry);
+    effect((onCleanup) => {
+      const unregister = registry.register({
+        control: this.control(),
+        inputId: this.inputId(),
+        label: this.label(),
+      });
+      onCleanup(unregister);
     });
   }
 

@@ -1,0 +1,7 @@
+# Mantém LF no repositório e na cópia de trabalho em qualquer sistema operacional,
+# evitando diferenças só de quebra de linha e falsos alertas do Prettier no Windows.
+* text=auto eol=lf
+
+*.ico binary
+*.png binary
+*.jpg binary

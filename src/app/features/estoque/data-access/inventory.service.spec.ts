@@ -1,8 +1,8 @@
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { provideTestEnvironment } from '../../../../testing/test-helpers';
-import { HANDLED_ERROR_STATUSES } from '../../../core/error-handling/http-context';
+import { provideTestEnvironment } from '@testing/test-helpers';
+import { HANDLED_ERROR_STATUSES } from '@core/error-handling/http-context';
 import { InventoryItemInput, isLowStock } from './inventory.models';
 import { InventoryService } from './inventory.service';
 
@@ -55,8 +55,12 @@ describe('InventoryService', () => {
     service.create(INPUT).subscribe();
     service.update('7', INPUT).subscribe();
 
-    expect(backend.expectOne({ method: 'POST', url: 'http://api.test/estoque/itens' }).request.body).toEqual(INPUT);
-    expect(backend.expectOne({ method: 'PUT', url: 'http://api.test/estoque/itens/7' }).request.body).toEqual(INPUT);
+    expect(
+      backend.expectOne({ method: 'POST', url: 'http://api.test/estoque/itens' }).request.body,
+    ).toEqual(INPUT);
+    expect(
+      backend.expectOne({ method: 'PUT', url: 'http://api.test/estoque/itens/7' }).request.body,
+    ).toEqual(INPUT);
   });
 });
 

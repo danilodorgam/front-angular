@@ -1,7 +1,7 @@
 import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { provideTestEnvironment, TEST_ENVIRONMENT } from '../../../testing/test-helpers';
+import { provideTestEnvironment, TEST_ENVIRONMENT } from '@testing/test-helpers';
 import { AppError } from './app-error';
 import { handledErrors } from './http-context';
 import { httpErrorInterceptor } from './http-error.interceptor';
@@ -42,7 +42,9 @@ describe('httpErrorInterceptor', () => {
     setup();
     let received: AppError | undefined;
 
-    http.get('/itens/9', { context: handledErrors(404) }).subscribe({ error: (e: AppError) => (received = e) });
+    http
+      .get('/itens/9', { context: handledErrors(404) })
+      .subscribe({ error: (e: AppError) => (received = e) });
     backend.expectOne('/itens/9').flush(null, { status: 404, statusText: 'Not Found' });
 
     expect(received?.kind).toBe('not-found');

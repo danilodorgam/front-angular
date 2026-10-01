@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { APP_ENVIRONMENT } from '../../../../environments/environment.token';
-import { LANDMARK_IDS } from '../../accessibility/accessibility-bar/accessibility-bar';
-import { TranslatePipe } from '../../localization/translate.pipe';
+import { APP_ENVIRONMENT } from '@env/environment.token';
+import { LANDMARK_IDS } from '@core/accessibility/accessibility-bar/accessibility-bar';
+import { TranslatePipe } from '@core/localization/translate.pipe';
 
 @Component({
   selector: 'app-footer',

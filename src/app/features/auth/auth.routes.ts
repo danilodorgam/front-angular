@@ -8,11 +8,12 @@ export const AUTH_ROUTES: Routes = [
     path: 'entrar',
     title: 'auth.signIn.title',
     canActivate: [guestGuard],
-    loadComponent: () => import('./sign-in/sign-in').then((m) => m.SignIn),
+    loadComponent: () => import('./pages/sign-in/sign-in').then((m) => m.SignIn),
   },
   {
     path: 'recuperar-senha',
     title: 'auth.passwordRecovery.title',
-    loadComponent: () => import('./password-recovery/password-recovery').then((m) => m.PasswordRecovery),
+    loadComponent: () =>
+      import('./pages/password-recovery/password-recovery').then((m) => m.PasswordRecovery),
   },
 ];

@@ -1,7 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, retry, throwError, timeout, timer } from 'rxjs';
-import { APP_ENVIRONMENT } from '../../../environments/environment.token';
+import { APP_ENVIRONMENT } from '@env/environment.token';
 import { HANDLED_ERROR_STATUSES } from './http-context';
 import { isRetryable, toAppError } from './http-error.mapper';
 import { LoggerService } from './logger.service';

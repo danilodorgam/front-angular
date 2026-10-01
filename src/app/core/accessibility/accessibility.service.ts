@@ -1,5 +1,5 @@
 import { DOCUMENT, Injectable, computed, inject, signal } from '@angular/core';
-import { readStorage, writeStorage } from '../../shared/utils/safe-storage';
+import { readStorage, writeStorage } from '@shared/utils/safe-storage';
 
 const CONTRAST_KEY = 'app.a11y.highContrast';
 const FONT_SCALE_KEY = 'app.a11y.fontScale';
@@ -17,7 +17,9 @@ export class AccessibilityService {
   private readonly root = inject(DOCUMENT).documentElement;
 
   private readonly contrast = signal(readStorage(CONTRAST_KEY) === 'true');
-  private readonly scale = signal(clampScale(Number(readStorage(FONT_SCALE_KEY) ?? FONT_SCALE.default)));
+  private readonly scale = signal(
+    clampScale(Number(readStorage(FONT_SCALE_KEY) ?? FONT_SCALE.default)),
+  );
 
   readonly highContrast = this.contrast.asReadonly();
   readonly fontScale = this.scale.asReadonly();

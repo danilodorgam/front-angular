@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { provideTestEnvironment } from '../../../testing/test-helpers';
+import { provideTestEnvironment } from '@testing/test-helpers';
 import { GlobalErrorHandler } from './global-error-handler';
 import { toAppError } from './http-error.mapper';
 import { NotificationService } from './notification.service';

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { TranslatePipe } from '../../localization/translate.pipe';
+import { TranslatePipe } from '@core/localization/translate.pipe';
 import { NotificationService } from '../notification.service';
 
 @Component({

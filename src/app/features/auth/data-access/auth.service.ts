@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, map, tap } from 'rxjs';
-import { APP_ENVIRONMENT } from '../../../../environments/environment.token';
-import { handledErrors } from '../../../core/error-handling/http-context';
-import { LayoutSession } from '../../../core/layout/layout-session';
-import { readStorage, writeStorage } from '../../../shared/utils/safe-storage';
+import { APP_ENVIRONMENT } from '@env/environment.token';
+import { handledErrors } from '@core/error-handling/http-context';
+import { LayoutSession } from '@core/layout/layout-session';
+import { readStorage, writeStorage } from '@shared/utils/safe-storage';
 import { AuthUser, PasswordRecoveryRequest, SignInRequest, SignInResponse } from './auth.models';
 
 const SESSION_KEY = 'app.session';

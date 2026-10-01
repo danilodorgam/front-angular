@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { TranslationParams } from '../localization/translation.types';
+import { TranslationParams } from '@core/localization/translation.types';
 
 export type NotificationType = 'success' | 'info' | 'warning' | 'error';
 

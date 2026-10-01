@@ -8,8 +8,12 @@
   <header class="page-header">
     <h1>{{ item.name }}</h1>
     <div class="form-actions">
-      <a [routerLink]="['/estoque', item.id, 'editar']" class="btn btn--primary">{{ 'common.actions.edit' | translate }}</a>
-      <button type="button" class="btn btn--danger" (click)="remove(item)">{{ 'common.actions.delete' | translate }}</button>
+      <a [routerLink]="['/estoque', item.id, 'editar']" class="btn btn--primary">{{
+        'common.actions.edit' | translate
+      }}</a>
+      <button type="button" class="btn btn--danger" (click)="remove(item)">
+        {{ 'common.actions.delete' | translate }}
+      </button>
     </div>
   </header>
 

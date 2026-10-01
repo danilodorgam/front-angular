@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { provideTestEnvironment } from '../../../testing/test-helpers';
+import { provideTestEnvironment } from '@testing/test-helpers';
 import { TRANSLATION_LOADER, TranslationLoader } from './translation-loader';
 import { TranslationService } from './translation.service';
 import { TranslationCatalog } from './translation.types';
