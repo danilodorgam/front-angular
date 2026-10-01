@@ -1,7 +1,9 @@
 import en from './en';
 import ptBR from './pt-BR';
 
-type Catalog = { readonly [key: string]: string | Catalog };
+interface Catalog {
+  readonly [key: string]: string | Catalog;
+}
 
 function flattenKeys(catalog: Catalog, prefix = ''): string[] {
   return Object.entries(catalog).flatMap(([key, value]) => {

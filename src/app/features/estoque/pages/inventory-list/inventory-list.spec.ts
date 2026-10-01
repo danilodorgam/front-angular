@@ -34,7 +34,7 @@ describe('InventoryList', () => {
     const rows = root.querySelectorAll('tbody tr');
     expect(rows).toHaveLength(2);
     // O Intl usa espaço não separável entre o símbolo e o valor.
-    expect(rows[0].textContent?.replace(/ /g, ' ')).toContain('R$ 27,90');
+    expect(rows[0].textContent?.replace(/\u00a0/g, ' ')).toContain('R$ 27,90');
     expect(rows[0].querySelector('.badge')?.textContent).toContain('Normal');
     expect(rows[1].querySelector('.badge')?.textContent).toContain('Estoque baixo');
   });
