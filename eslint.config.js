@@ -33,12 +33,15 @@ const DEPENDENCY_POLICIES = [
   {
     from: { element: { types: { anyOf: ['core', 'shared'] } } },
     disallow: { to: { element: { type: 'feature' } } },
-    message: 'core/shared não podem depender de features. Use um token de injeção (ex.: LAYOUT_SESSION).',
+    message:
+      'core/shared não podem depender de features. Use um token de injeção (ex.: LAYOUT_SESSION).',
   },
   {
     from: { element: { type: 'feature' } },
     disallow: {
-      to: { element: { type: 'feature', captured: { feature: '!{{from.element.captured.feature}}' } } },
+      to: {
+        element: { type: 'feature', captured: { feature: '!{{from.element.captured.feature}}' } },
+      },
     },
     message: 'Uma feature não pode importar outra. Mova o que é comum para shared/ ou core/.',
   },

@@ -62,7 +62,10 @@ export class TranslationService {
   }
 }
 
-function resolvePath(catalog: TranslationCatalog, key: string): string | TranslationCatalog | undefined {
+function resolvePath(
+  catalog: TranslationCatalog,
+  key: string,
+): string | TranslationCatalog | undefined {
   return key
     .split('.')
     .reduce<string | TranslationCatalog | undefined>(

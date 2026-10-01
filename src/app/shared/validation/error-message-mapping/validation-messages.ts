@@ -23,7 +23,9 @@ const MESSAGE_KEYS: Readonly<Record<string, string>> = {
 /** Quando o campo tem vários erros, mostra o mais relevante primeiro. */
 const PRIORITY = Object.keys(MESSAGE_KEYS);
 
-export function mapValidationError(errors: ValidationErrors | null | undefined): ValidationMessage | null {
+export function mapValidationError(
+  errors: ValidationErrors | null | undefined,
+): ValidationMessage | null {
   if (!errors) {
     return null;
   }

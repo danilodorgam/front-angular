@@ -7,8 +7,28 @@ import { InventoryService } from '../../data-access/inventory.service';
 import { InventoryList } from './inventory-list';
 
 const ITEMS: InventoryItem[] = [
-  { id: '1', sku: 'PAP', name: 'Papel A4', description: '', quantity: 50, minimumStock: 10, unitPrice: 27.9, supplierEmail: '', updatedAt: '' },
-  { id: '2', sku: 'TON', name: 'Toner', description: '', quantity: 2, minimumStock: 5, unitPrice: 189, supplierEmail: '', updatedAt: '' },
+  {
+    id: '1',
+    sku: 'PAP',
+    name: 'Papel A4',
+    description: '',
+    quantity: 50,
+    minimumStock: 10,
+    unitPrice: 27.9,
+    supplierEmail: '',
+    updatedAt: '',
+  },
+  {
+    id: '2',
+    sku: 'TON',
+    name: 'Toner',
+    description: '',
+    quantity: 2,
+    minimumStock: 5,
+    unitPrice: 189,
+    supplierEmail: '',
+    updatedAt: '',
+  },
 ];
 
 describe('InventoryList', () => {
@@ -16,7 +36,11 @@ describe('InventoryList', () => {
 
   async function setup() {
     TestBed.configureTestingModule({
-      providers: [provideTestEnvironment(), provideRouter([]), { provide: InventoryService, useValue: { list } }],
+      providers: [
+        provideTestEnvironment(),
+        provideRouter([]),
+        { provide: InventoryService, useValue: { list } },
+      ],
     });
     await loadTranslations();
     const fixture = TestBed.createComponent(InventoryList);

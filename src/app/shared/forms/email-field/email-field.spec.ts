@@ -10,7 +10,10 @@ import { EmailField } from './email-field';
   template: `<app-email-field inputId="email" label="auth.signIn.email" [control]="control" />`,
 })
 class Host {
-  control = new FormControl('', { nonNullable: true, validators: [Validators.required, AppValidators.email] });
+  control = new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required, AppValidators.email],
+  });
 }
 
 describe('EmailField', () => {
@@ -20,7 +23,12 @@ describe('EmailField', () => {
     const fixture = TestBed.createComponent(Host);
     await fixture.whenStable();
     const root = fixture.nativeElement as HTMLElement;
-    return { fixture, root, input: root.querySelector('input') as HTMLInputElement, control: fixture.componentInstance.control };
+    return {
+      fixture,
+      root,
+      input: root.querySelector('input') as HTMLInputElement,
+      control: fixture.componentInstance.control,
+    };
   }
 
   it('usa o tipo e o teclado de e-mail', async () => {

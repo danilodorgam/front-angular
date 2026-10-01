@@ -17,7 +17,9 @@ function placeholders(text: string): string[] {
 }
 
 function valueAt(catalog: Catalog, path: string): string {
-  return path.split('.').reduce<Catalog | string>((node, key) => (node as Catalog)[key], catalog) as string;
+  return path
+    .split('.')
+    .reduce<Catalog | string>((node, key) => (node as Catalog)[key], catalog) as string;
 }
 
 /** Garante que nenhum idioma fique com textos faltando ou parâmetros diferentes. */

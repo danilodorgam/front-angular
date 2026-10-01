@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, computed, inject, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  OnInit,
+  computed,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -46,10 +55,26 @@ export class ItemEdit implements OnInit {
   protected readonly isEdit = computed(() => !!this.id());
 
   protected readonly form = this.fb.group({
-    sku: ['', [Validators.required, AppValidators.notBlank, Validators.maxLength(20), Validators.pattern(/^[A-Za-z0-9-]+$/)]],
+    sku: [
+      '',
+      [
+        Validators.required,
+        AppValidators.notBlank,
+        Validators.maxLength(20),
+        Validators.pattern(/^[A-Za-z0-9-]+$/),
+      ],
+    ],
     name: ['', [Validators.required, AppValidators.notBlank, Validators.maxLength(100)]],
-    quantity: this.fb.control<number | null>(null, [Validators.required, Validators.min(0), AppValidators.numeric()]),
-    minimumStock: this.fb.control<number | null>(0, [Validators.required, Validators.min(0), AppValidators.numeric()]),
+    quantity: this.fb.control<number | null>(null, [
+      Validators.required,
+      Validators.min(0),
+      AppValidators.numeric(),
+    ]),
+    minimumStock: this.fb.control<number | null>(0, [
+      Validators.required,
+      Validators.min(0),
+      AppValidators.numeric(),
+    ]),
     unitPrice: this.fb.control<number | null>(null, [
       Validators.required,
       Validators.min(0),
@@ -65,7 +90,11 @@ export class ItemEdit implements OnInit {
     { name: 'quantity', inputId: 'item-quantity', label: 'estoque.fields.quantity' },
     { name: 'minimumStock', inputId: 'item-minimum-stock', label: 'estoque.fields.minimumStock' },
     { name: 'unitPrice', inputId: 'item-unit-price', label: 'estoque.fields.unitPrice' },
-    { name: 'supplierEmail', inputId: 'item-supplier-email', label: 'estoque.fields.supplierEmail' },
+    {
+      name: 'supplierEmail',
+      inputId: 'item-supplier-email',
+      label: 'estoque.fields.supplierEmail',
+    },
     { name: 'description', inputId: 'item-description', label: 'estoque.fields.description' },
   ];
 

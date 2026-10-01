@@ -25,7 +25,12 @@ export function toAppError(error: unknown): AppError {
     return build('timeout', null, error);
   }
   if (error instanceof HttpErrorResponse) {
-    return build(kindFromStatus(error.status), error.status, error, extractFieldErrors(error.error));
+    return build(
+      kindFromStatus(error.status),
+      error.status,
+      error,
+      extractFieldErrors(error.error),
+    );
   }
   return build('unknown', null, error);
 }
@@ -68,7 +73,13 @@ function build(
   cause: unknown,
   fieldErrors?: Record<string, string>,
 ): AppError {
-  return { kind, status, messageKey: MESSAGE_KEYS[kind], cause, ...(fieldErrors && { fieldErrors }) };
+  return {
+    kind,
+    status,
+    messageKey: MESSAGE_KEYS[kind],
+    cause,
+    ...(fieldErrors && { fieldErrors }),
+  };
 }
 
 function extractFieldErrors(body: unknown): Record<string, string> | undefined {

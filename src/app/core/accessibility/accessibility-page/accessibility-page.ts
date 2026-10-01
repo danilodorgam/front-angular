@@ -33,7 +33,9 @@ import { TranslatePipe } from '@core/localization/translate.pipe';
       <p>{{ 'accessibility.page.readersText' | translate }}</p>
 
       <p>
-        <a href="https://emag.governoeletronico.gov.br/">{{ 'accessibility.page.moreInfo' | translate }}</a>
+        <a href="https://emag.governoeletronico.gov.br/">{{
+          'accessibility.page.moreInfo' | translate
+        }}</a>
       </p>
     </article>
   `,

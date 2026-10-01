@@ -6,7 +6,12 @@ import { TextField } from './text-field';
 
 @Component({
   imports: [TextField],
-  template: `<app-text-field inputId="nome" label="estoque.fields.name" hint="estoque.hints.sku" [control]="control" />`,
+  template: `<app-text-field
+    inputId="nome"
+    label="estoque.fields.name"
+    hint="estoque.hints.sku"
+    [control]="control"
+  />`,
 })
 class Host {
   control = new FormControl('', { nonNullable: true, validators: [Validators.required] });

@@ -19,7 +19,12 @@
         [maxlength]="20"
         [control]="form.controls.sku"
       />
-      <app-text-field inputId="item-name" label="estoque.fields.name" [maxlength]="100" [control]="form.controls.name" />
+      <app-text-field
+        inputId="item-name"
+        label="estoque.fields.name"
+        [maxlength]="100"
+        [control]="form.controls.name"
+      />
       <app-number-field
         inputId="item-quantity"
         label="estoque.fields.quantity"
@@ -55,7 +60,12 @@
     />
 
     <div class="form-actions">
-      <button type="submit" class="btn btn--primary" [disabled]="saving()" [attr.aria-busy]="saving()">
+      <button
+        type="submit"
+        class="btn btn--primary"
+        [disabled]="saving()"
+        [attr.aria-busy]="saving()"
+      >
         {{ (saving() ? 'common.actions.saving' : 'common.actions.save') | translate }}
       </button>
       <a class="btn btn--secondary" [routerLink]="isEdit() ? ['/estoque', id()] : ['/estoque']">

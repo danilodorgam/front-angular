@@ -26,7 +26,9 @@ export class InventoryService {
   }
 
   update(id: string, input: InventoryItemInput): Observable<InventoryItem> {
-    return this.http.put<InventoryItem>(this.itemUrl(id), input, { context: handledErrors(400, 422) });
+    return this.http.put<InventoryItem>(this.itemUrl(id), input, {
+      context: handledErrors(400, 422),
+    });
   }
 
   remove(id: string): Observable<void> {

@@ -9,7 +9,11 @@ import { FormErrorSummary, SummaryField } from './form-error-summary';
   imports: [FormErrorSummary, TextField],
   template: `
     <app-form-error-summary [form]="form" [fields]="fields" [submitAttempt]="attempt()" />
-    <app-text-field inputId="campo-nome" label="estoque.fields.name" [control]="form.controls.name" />
+    <app-text-field
+      inputId="campo-nome"
+      label="estoque.fields.name"
+      [control]="form.controls.name"
+    />
     <app-text-field inputId="campo-sku" label="estoque.fields.sku" [control]="form.controls.sku" />
   `,
 })

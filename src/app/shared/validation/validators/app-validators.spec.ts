@@ -3,16 +3,23 @@ import { AppValidators } from './app-validators';
 
 describe('AppValidators', () => {
   describe('email', () => {
-    it.each(['maria@exemplo.gov.br', 'joao.silva+estoque@orgao.com', 'a@b.co'])('aceita %s', (value) => {
-      expect(AppValidators.email(new FormControl(value))).toBeNull();
-    });
-
-    it.each(['maria', 'maria@', 'maria@exemplo', '@exemplo.com', 'maria @exemplo.com', 'maria@exemplo.c'])(
-      'rejeita %s',
+    it.each(['maria@exemplo.gov.br', 'joao.silva+estoque@orgao.com', 'a@b.co'])(
+      'aceita %s',
       (value) => {
-        expect(AppValidators.email(new FormControl(value))).toEqual({ email: true });
+        expect(AppValidators.email(new FormControl(value))).toBeNull();
       },
     );
+
+    it.each([
+      'maria',
+      'maria@',
+      'maria@exemplo',
+      '@exemplo.com',
+      'maria @exemplo.com',
+      'maria@exemplo.c',
+    ])('rejeita %s', (value) => {
+      expect(AppValidators.email(new FormControl(value))).toEqual({ email: true });
+    });
 
     it('não valida campo vazio (responsabilidade do required)', () => {
       expect(AppValidators.email(new FormControl(''))).toBeNull();

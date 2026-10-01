@@ -13,7 +13,9 @@ import { translateValidationError } from '@shared/validation/error-message-mappi
     @if (message(); as text) {
       <p class="field-error" [id]="errorId()">
         <span class="field-error__icon" aria-hidden="true">!</span>
-        <span><span class="sr-only">{{ 'validation.errorPrefix' | translate }} </span>{{ text }}</span>
+        <span
+          ><span class="sr-only">{{ 'validation.errorPrefix' | translate }} </span>{{ text }}</span
+        >
       </p>
     }
   `,

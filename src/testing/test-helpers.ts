@@ -21,7 +21,9 @@ export function provideTestEnvironment(overrides: Partial<AppEnvironment> = {}):
 }
 
 /** Carrega o catálogo real de traduções (pt-BR por padrão) para testes de componentes. */
-export async function loadTranslations(language: SupportedLanguage = 'pt-BR'): Promise<TranslationService> {
+export async function loadTranslations(
+  language: SupportedLanguage = 'pt-BR',
+): Promise<TranslationService> {
   registerAppLocales();
   const translation = TestBed.inject(TranslationService);
   await translation.use(language);

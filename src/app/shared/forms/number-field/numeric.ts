@@ -33,7 +33,7 @@ export function formatNumeric(value: number | null | undefined, decimalSeparator
 
 export function decimalSeparatorFor(locale: string): string {
   return (
-    new Intl.NumberFormat(locale).formatToParts(1.1).find((part) => part.type === 'decimal')?.value ??
-    ','
+    new Intl.NumberFormat(locale).formatToParts(1.1).find((part) => part.type === 'decimal')
+      ?.value ?? ','
   );
 }

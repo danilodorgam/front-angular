@@ -41,7 +41,10 @@ export class TextareaField extends BaseField<string> {
     return max === null ? null : max - (this.state().value?.length ?? 0);
   });
   protected readonly textareaDescribedBy = computed(
-    () => [this.describedBy(), this.remaining() !== null ? this.counterId() : null].filter(Boolean).join(' ') || null,
+    () =>
+      [this.describedBy(), this.remaining() !== null ? this.counterId() : null]
+        .filter(Boolean)
+        .join(' ') || null,
   );
 
   protected onInput(event: Event): void {

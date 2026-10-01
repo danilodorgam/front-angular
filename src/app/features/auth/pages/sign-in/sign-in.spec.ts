@@ -13,7 +13,11 @@ describe('SignIn', () => {
   async function setup(returnUrl?: string) {
     signIn.mockReset();
     TestBed.configureTestingModule({
-      providers: [provideTestEnvironment(), provideRouter([]), { provide: AuthService, useValue: { signIn } }],
+      providers: [
+        provideTestEnvironment(),
+        provideRouter([]),
+        { provide: AuthService, useValue: { signIn } },
+      ],
     });
     await loadTranslations();
     const fixture = TestBed.createComponent(SignIn);
@@ -73,6 +77,8 @@ describe('SignIn', () => {
     fill('maria@exemplo.gov.br', 'senhaerrada');
     await submit();
 
-    expect(root.querySelector('[role="alert"]')?.textContent).toContain('E-mail ou senha incorretos');
+    expect(root.querySelector('[role="alert"]')?.textContent).toContain(
+      'E-mail ou senha incorretos',
+    );
   });
 });

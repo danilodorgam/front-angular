@@ -17,7 +17,9 @@ export class AccessibilityService {
   private readonly root = inject(DOCUMENT).documentElement;
 
   private readonly contrast = signal(readStorage(CONTRAST_KEY) === 'true');
-  private readonly scale = signal(clampScale(Number(readStorage(FONT_SCALE_KEY) ?? FONT_SCALE.default)));
+  private readonly scale = signal(
+    clampScale(Number(readStorage(FONT_SCALE_KEY) ?? FONT_SCALE.default)),
+  );
 
   readonly highContrast = this.contrast.asReadonly();
   readonly fontScale = this.scale.asReadonly();

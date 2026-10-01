@@ -7,7 +7,12 @@ import { NumberField } from './number-field';
 @Component({
   imports: [NumberField],
   template: `
-    <app-number-field inputId="qtd" label="estoque.fields.quantity" [allowDecimal]="decimal()" [control]="control" />
+    <app-number-field
+      inputId="qtd"
+      label="estoque.fields.quantity"
+      [allowDecimal]="decimal()"
+      [control]="control"
+    />
   `,
 })
 class Host {
@@ -23,7 +28,12 @@ describe('NumberField', () => {
     fixture.componentInstance.decimal.set(options.decimal ?? false);
     await fixture.whenStable();
     const root = fixture.nativeElement as HTMLElement;
-    return { fixture, root, input: root.querySelector('input') as HTMLInputElement, control: fixture.componentInstance.control };
+    return {
+      fixture,
+      root,
+      input: root.querySelector('input') as HTMLInputElement,
+      control: fixture.componentInstance.control,
+    };
   }
 
   it('usa type="text" com teclado numérico', async () => {
@@ -50,7 +60,9 @@ describe('NumberField', () => {
     await fixture.whenStable();
 
     expect(control.value).toBeNull();
-    expect(root.querySelector('.field-error')?.textContent).toContain('Preencha o campo Quantidade.');
+    expect(root.querySelector('.field-error')?.textContent).toContain(
+      'Preencha o campo Quantidade.',
+    );
   });
 
   it('aceita decimais com vírgula quando permitido', async () => {

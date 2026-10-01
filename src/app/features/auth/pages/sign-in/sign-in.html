@@ -26,7 +26,12 @@
     />
 
     <div class="form-actions">
-      <button type="submit" class="btn btn--primary" [disabled]="submitting()" [attr.aria-busy]="submitting()">
+      <button
+        type="submit"
+        class="btn btn--primary"
+        [disabled]="submitting()"
+        [attr.aria-busy]="submitting()"
+      >
         {{ (submitting() ? 'auth.signIn.submitting' : 'auth.signIn.submit') | translate }}
       </button>
       <a routerLink="/auth/recuperar-senha">{{ 'auth.signIn.forgotPassword' | translate }}</a>

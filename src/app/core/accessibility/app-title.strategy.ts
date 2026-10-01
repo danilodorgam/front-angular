@@ -30,8 +30,12 @@ export class AppTitleStrategy extends TitleStrategy {
     this.title.setTitle(this.compose(key));
 
     if (!this.initialNavigation) {
-      const page = key ? this.translation.translate(key) : this.translation.translate('common.appName');
-      this.announcer.announce(this.translation.translate('accessibility.routeChanged', { title: page }));
+      const page = key
+        ? this.translation.translate(key)
+        : this.translation.translate('common.appName');
+      this.announcer.announce(
+        this.translation.translate('accessibility.routeChanged', { title: page }),
+      );
     }
     this.initialNavigation = false;
   }

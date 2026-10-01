@@ -26,7 +26,11 @@ import { FieldError } from '../field-error/field-error';
       }
       <ng-content />
       @if (f.showError()) {
-        <app-field-error [errorId]="f.errorId()" [errors]="f.state().errors" [fieldLabel]="f.label()" />
+        <app-field-error
+          [errorId]="f.errorId()"
+          [errors]="f.state().errors"
+          [fieldLabel]="f.label()"
+        />
       }
     </div>
   `,

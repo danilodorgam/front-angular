@@ -27,7 +27,9 @@ describe('App', () => {
     const firstLink = root.querySelector('a') as HTMLAnchorElement;
     expect(firstLink.getAttribute('accesskey')).toBe('1');
     expect(firstLink.textContent).toContain('Ir para o conteúdo');
-    const keys = Array.from(root.querySelectorAll('.a11y-bar a[accesskey]')).map((a) => a.getAttribute('accesskey'));
+    const keys = Array.from(root.querySelectorAll('.a11y-bar a[accesskey]')).map((a) =>
+      a.getAttribute('accesskey'),
+    );
     expect(keys).toEqual(['1', '2', '4']);
   });
 

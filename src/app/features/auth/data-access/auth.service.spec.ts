@@ -18,7 +18,12 @@ describe('AuthService', () => {
   beforeEach(() => {
     sessionStorage.clear();
     TestBed.configureTestingModule({
-      providers: [provideTestEnvironment(), provideHttpClient(), provideHttpClientTesting(), provideRouter([])],
+      providers: [
+        provideTestEnvironment(),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideRouter([]),
+      ],
     });
     backend = TestBed.inject(HttpTestingController);
   });

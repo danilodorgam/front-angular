@@ -10,7 +10,14 @@ import { AuthService } from '../../data-access/auth.service';
 
 @Component({
   selector: 'app-sign-in',
-  imports: [ReactiveFormsModule, RouterLink, TranslatePipe, EmailField, TextField, FormErrorSummary],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    TranslatePipe,
+    EmailField,
+    TextField,
+    FormErrorSummary,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './sign-in.html',
 })

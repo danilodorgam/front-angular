@@ -40,16 +40,24 @@ describe('translateValidationError', () => {
     expect(translateValidationError(translation, { required: true }, 'estoque.fields.name')).toBe(
       'Preencha o campo Nome.',
     );
-    expect(translateValidationError(translation, { min: { min: 0, actual: -1 } }, 'estoque.fields.quantity')).toBe(
-      'O campo Quantidade deve ser maior ou igual a 0.',
-    );
+    expect(
+      translateValidationError(
+        translation,
+        { min: { min: 0, actual: -1 } },
+        'estoque.fields.quantity',
+      ),
+    ).toBe('O campo Quantidade deve ser maior ou igual a 0.');
   });
 
   it('traduz mensagens do servidor enviadas como chave', async () => {
     const translation = await loadTranslations('en');
 
-    expect(translateValidationError(translation, { server: 'estoque.errors.skuTaken' }, 'estoque.fields.sku')).toBe(
-      'An item with this code already exists.',
-    );
+    expect(
+      translateValidationError(
+        translation,
+        { server: 'estoque.errors.skuTaken' },
+        'estoque.fields.sku',
+      ),
+    ).toBe('An item with this code already exists.');
   });
 });

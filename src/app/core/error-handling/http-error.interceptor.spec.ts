@@ -42,7 +42,9 @@ describe('httpErrorInterceptor', () => {
     setup();
     let received: AppError | undefined;
 
-    http.get('/itens/9', { context: handledErrors(404) }).subscribe({ error: (e: AppError) => (received = e) });
+    http
+      .get('/itens/9', { context: handledErrors(404) })
+      .subscribe({ error: (e: AppError) => (received = e) });
     backend.expectOne('/itens/9').flush(null, { status: 404, statusText: 'Not Found' });
 
     expect(received?.kind).toBe('not-found');

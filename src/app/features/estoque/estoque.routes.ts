@@ -5,7 +5,8 @@ export const ESTOQUE_ROUTES: Routes = [
   {
     path: '',
     title: 'estoque.list.title',
-    loadComponent: () => import('./pages/inventory-list/inventory-list').then((m) => m.InventoryList),
+    loadComponent: () =>
+      import('./pages/inventory-list/inventory-list').then((m) => m.InventoryList),
   },
   {
     path: 'novo',
