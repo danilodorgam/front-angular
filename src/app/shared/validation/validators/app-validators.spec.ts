@@ -38,6 +38,25 @@ describe('AppValidators', () => {
     });
   });
 
+  describe('pattern', () => {
+    const sku = AppValidators.pattern(/^[A-Z0-9-]+$/, 'estoque.validation.sku');
+
+    it('aceita valores no formato e ignora campo vazio', () => {
+      expect(sku(new FormControl('ABC-1'))).toBeNull();
+      expect(sku(new FormControl(''))).toBeNull();
+    });
+
+    it('inclui a chave da mensagem no erro', () => {
+      expect(sku(new FormControl('abc 1'))).toEqual({
+        pattern: {
+          requiredPattern: '/^[A-Z0-9-]+$/',
+          actualValue: 'abc 1',
+          messageKey: 'estoque.validation.sku',
+        },
+      });
+    });
+  });
+
   describe('numeric', () => {
     const integer = AppValidators.numeric();
     const decimal = AppValidators.numeric({ allowDecimal: true });

@@ -46,6 +46,9 @@
     "titleEdit": "Edit item",
     "saved": "Item saved successfully."
   },
+  "validation": {
+    "sku": "{{field}} accepts only unaccented letters, numbers and hyphens."
+  },
   "errors": {
     "skuTaken": "An item with this code already exists."
   }

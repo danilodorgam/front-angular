@@ -4,12 +4,17 @@ import { TranslationService } from '@core/localization/translation.service';
 export interface ValidationMessage {
   readonly key: string;
   readonly params: Record<string, unknown>;
+  /** Usada quando `key` não existe no catálogo de traduções. */
+  readonly fallbackKey?: string;
 }
 
 /** Chave fixa ou escolhida a partir dos parâmetros do erro. */
 type MessageKey = string | ((params: Record<string, unknown>) => string);
 
-/** Erro do validador → chave de tradução em `src/i18n/<idioma>/validation.json`. */
+/**
+ * Erros cuja chave foge da convenção `validation.<nomeDoErro>`
+ * (ou que precisam de prioridade sobre os demais).
+ */
 const MESSAGE_KEYS: Readonly<Record<string, MessageKey>> = {
   required: 'validation.required',
   notBlank: 'validation.required',
@@ -25,9 +30,18 @@ const MESSAGE_KEYS: Readonly<Record<string, MessageKey>> = {
   server: 'validation.server',
 };
 
+const GENERIC_KEY = 'validation.invalid';
+
 /** Quando o campo tem vários erros, mostra o mais relevante primeiro. */
 const PRIORITY = Object.keys(MESSAGE_KEYS);
 
+/**
+ * Escolhe a chave de tradução do erro, nesta ordem:
+ * 1. `messageKey` enviado pelo próprio validador (ex.: `AppValidators.pattern(regex, 'x.y')`);
+ * 2. o mapa `MESSAGE_KEYS`;
+ * 3. a convenção `validation.<nomeDoErro>`, com `validation.invalid` como reserva.
+ *    Assim um validador novo (ex.: `cpf`) só precisa da mensagem no `validation.json`.
+ */
 export function mapValidationError(
   errors: ValidationErrors | null | undefined,
 ): ValidationMessage | null {
@@ -45,8 +59,15 @@ export function mapValidationError(
       : typeof value === 'object' && value !== null
         ? { ...value }
         : {};
-  const messageKey = MESSAGE_KEYS[errorKey] ?? 'validation.invalid';
-  return { key: typeof messageKey === 'function' ? messageKey(params) : messageKey, params };
+
+  if (typeof params['messageKey'] === 'string') {
+    return { key: params['messageKey'], params, fallbackKey: GENERIC_KEY };
+  }
+  const mapped = MESSAGE_KEYS[errorKey];
+  if (mapped) {
+    return { key: typeof mapped === 'function' ? mapped(params) : mapped, params };
+  }
+  return { key: `validation.${errorKey}`, params, fallbackKey: GENERIC_KEY };
 }
 
 /**
@@ -69,5 +90,9 @@ export function translateValidationError(
   if (typeof params['message'] === 'string') {
     params['message'] = translation.translate(params['message']);
   }
-  return translation.translate(mapped.key, params);
+  const message = translation.translate(mapped.key, params);
+  // O TranslationService devolve a própria chave quando ela não existe no catálogo.
+  return message === mapped.key && mapped.fallbackKey
+    ? translation.translate(mapped.fallbackKey, params)
+    : message;
 }

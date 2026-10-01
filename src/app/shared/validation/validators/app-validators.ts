@@ -1,4 +1,4 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 /**
  * Mais restritivo que `Validators.email` do Angular, que aceita "a@b" (sem domínio).
@@ -69,5 +69,18 @@ function countDecimals(value: number | string): number {
   return decimals.length;
 }
 
+/**
+ * Igual ao `Validators.pattern`, mas com mensagem própria em vez do genérico "formato inválido".
+ * Ex.: `AppValidators.pattern(/^[A-Z0-9-]+$/, 'estoque.validation.sku')`.
+ * A mensagem recebe `{{field}}` como as demais.
+ */
+function pattern(regex: RegExp | string, messageKey: string): ValidatorFn {
+  const validator = Validators.pattern(regex);
+  return (control: AbstractControl): ValidationErrors | null => {
+    const errors = validator(control);
+    return errors ? { pattern: { ...errors['pattern'], messageKey } } : null;
+  };
+}
+
 /** Validadores reutilizáveis, sem regra de negócio. Use junto com os do Angular. */
-export const AppValidators = { notBlank, email, numeric } as const;
+export const AppValidators = { notBlank, email, numeric, pattern } as const;

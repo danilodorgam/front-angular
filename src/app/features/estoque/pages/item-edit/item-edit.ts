@@ -61,7 +61,7 @@ export class ItemEdit implements OnInit {
         Validators.required,
         AppValidators.notBlank,
         Validators.maxLength(20),
-        Validators.pattern(/^[A-Za-z0-9-]+$/),
+        AppValidators.pattern(/^[A-Za-z0-9-]+$/, 'estoque.validation.sku'),
       ],
     ],
     name: ['', [Validators.required, AppValidators.notBlank, Validators.maxLength(100)]],
