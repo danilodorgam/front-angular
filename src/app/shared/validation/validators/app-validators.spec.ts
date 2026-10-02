@@ -3,16 +3,23 @@ import { AppValidators } from './app-validators';
 
 describe('AppValidators', () => {
   describe('email', () => {
-    it.each(['maria@exemplo.gov.br', 'joao.silva+estoque@orgao.com', 'a@b.co'])('aceita %s', (value) => {
-      expect(AppValidators.email(new FormControl(value))).toBeNull();
-    });
-
-    it.each(['maria', 'maria@', 'maria@exemplo', '@exemplo.com', 'maria @exemplo.com', 'maria@exemplo.c'])(
-      'rejeita %s',
+    it.each(['maria@exemplo.gov.br', 'joao.silva+estoque@orgao.com', 'a@b.co'])(
+      'aceita %s',
       (value) => {
-        expect(AppValidators.email(new FormControl(value))).toEqual({ email: true });
+        expect(AppValidators.email(new FormControl(value))).toBeNull();
       },
     );
+
+    it.each([
+      'maria',
+      'maria@',
+      'maria@exemplo',
+      '@exemplo.com',
+      'maria @exemplo.com',
+      'maria@exemplo.c',
+    ])('rejeita %s', (value) => {
+      expect(AppValidators.email(new FormControl(value))).toEqual({ email: true });
+    });
 
     it('não valida campo vazio (responsabilidade do required)', () => {
       expect(AppValidators.email(new FormControl(''))).toBeNull();
@@ -28,6 +35,50 @@ describe('AppValidators', () => {
     it('aceita texto com conteúdo e ignora campo vazio', () => {
       expect(AppValidators.notBlank(new FormControl(' abc '))).toBeNull();
       expect(AppValidators.notBlank(new FormControl(''))).toBeNull();
+    });
+  });
+
+  describe('pattern', () => {
+    const sku = AppValidators.pattern(/^[A-Z0-9-]+$/, 'estoque.validation.sku');
+
+    it('aceita valores no formato e ignora campo vazio', () => {
+      expect(sku(new FormControl('ABC-1'))).toBeNull();
+      expect(sku(new FormControl(''))).toBeNull();
+    });
+
+    it('inclui a chave da mensagem no erro', () => {
+      expect(sku(new FormControl('abc 1'))).toEqual({
+        pattern: {
+          requiredPattern: '/^[A-Z0-9-]+$/',
+          actualValue: 'abc 1',
+          messageKey: 'estoque.validation.sku',
+        },
+      });
+    });
+  });
+
+  describe('letters', () => {
+    it.each(['José', 'Maria da Conceição', "Ana D'Ávila-Souza", 'Zoë'])('aceita %s', (value) => {
+      expect(AppValidators.letters(new FormControl(value))).toBeNull();
+    });
+
+    it.each(['João 2', 'ana@silva', 'R2-D2'])('rejeita %s', (value) => {
+      expect(AppValidators.letters(new FormControl(value))).toEqual({ letters: true });
+    });
+  });
+
+  describe('alphanumeric e digits', () => {
+    it('alphanumeric aceita letras, números e espaço', () => {
+      expect(AppValidators.alphanumeric(new FormControl('Sala 12B'))).toBeNull();
+      expect(AppValidators.alphanumeric(new FormControl('Sala-12'))).toEqual({
+        alphanumeric: true,
+      });
+    });
+
+    it('digits aceita somente 0-9', () => {
+      expect(AppValidators.digits(new FormControl('00123'))).toBeNull();
+      expect(AppValidators.digits(new FormControl('12.3'))).toEqual({ digits: true });
+      expect(AppValidators.digits(new FormControl(''))).toBeNull();
     });
   });
 
@@ -49,6 +100,14 @@ describe('AppValidators', () => {
       expect(decimal(new FormControl(1.5))).toBeNull();
       expect(decimal(new FormControl('1,5'))).toBeNull();
       expect(decimal(new FormControl('1.5'))).toBeNull();
+    });
+
+    it('valida o limite de casas decimais', () => {
+      const money = AppValidators.numeric({ allowDecimal: true, decimalPlaces: 2 });
+
+      expect(money(new FormControl(12.34))).toBeNull();
+      expect(money(new FormControl('12,3'))).toBeNull();
+      expect(money(new FormControl(12.345))).toEqual({ decimalPlaces: { max: 2, actual: 3 } });
     });
 
     it('rejeita textos não numéricos', () => {

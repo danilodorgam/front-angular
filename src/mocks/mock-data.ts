@@ -1,5 +1,5 @@
-import type { AuthUser } from '../app/features/auth/data-access/auth.models';
-import type { InventoryItem } from '../app/features/estoque/data-access/inventory.models';
+import type { AuthUser } from '@features/auth/data-access/auth.models';
+import type { InventoryItem } from '@features/estoque/data-access/inventory.models';
 
 /** Credenciais aceitas pelo backend simulado (somente para desenvolvimento local). */
 export const MOCK_CREDENTIALS = { email: 'admin@exemplo.gov.br', password: 'Senha@123' } as const;

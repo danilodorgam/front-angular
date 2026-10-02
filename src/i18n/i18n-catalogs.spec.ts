@@ -1,7 +1,9 @@
 import en from './en';
 import ptBR from './pt-BR';
 
-type Catalog = { readonly [key: string]: string | Catalog };
+interface Catalog {
+  readonly [key: string]: string | Catalog;
+}
 
 function flattenKeys(catalog: Catalog, prefix = ''): string[] {
   return Object.entries(catalog).flatMap(([key, value]) => {
@@ -15,7 +17,9 @@ function placeholders(text: string): string[] {
 }
 
 function valueAt(catalog: Catalog, path: string): string {
-  return path.split('.').reduce<Catalog | string>((node, key) => (node as Catalog)[key], catalog) as string;
+  return path
+    .split('.')
+    .reduce<Catalog | string>((node, key) => (node as Catalog)[key], catalog) as string;
 }
 
 /** Garante que nenhum idioma fique com textos faltando ou parâmetros diferentes. */

@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { APP_ENVIRONMENT } from '../../../../environments/environment.token';
-import { handledErrors } from '../../../core/error-handling/http-context';
+import { APP_ENVIRONMENT } from '@env/environment.token';
+import { handledErrors } from '@core/error-handling/http-context';
 import { InventoryItem, InventoryItemInput } from './inventory.models';
 
 @Injectable({ providedIn: 'root' })
@@ -26,7 +26,9 @@ export class InventoryService {
   }
 
   update(id: string, input: InventoryItemInput): Observable<InventoryItem> {
-    return this.http.put<InventoryItem>(this.itemUrl(id), input, { context: handledErrors(400, 422) });
+    return this.http.put<InventoryItem>(this.itemUrl(id), input, {
+      context: handledErrors(400, 422),
+    });
   }
 
   remove(id: string): Observable<void> {

@@ -1,22 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { TextCharset } from '@shared/validation/charsets';
+import { MASKS, MaskPattern } from '../mask/mask';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, Validators } from '@angular/forms';
-import { blur, loadTranslations, provideTestEnvironment, typeInto } from '../../../../testing/test-helpers';
+import { blur, loadTranslations, provideTestEnvironment, typeInto } from '@testing/test-helpers';
 import { TextField } from './text-field';
 
 @Component({
   imports: [TextField],
-  template: `<app-text-field inputId="nome" label="estoque.fields.name" hint="estoque.hints.sku" [control]="control" />`,
+  template: `<app-text-field
+    inputId="nome"
+    label="estoque.fields.name"
+    hint="estoque.hints.sku"
+    [charset]="charset()"
+    [mask]="mask()"
+    [control]="control"
+  />`,
 })
 class Host {
+  readonly charset = signal<TextCharset>('any');
+  readonly mask = signal<MaskPattern | null>(null);
   control = new FormControl('', { nonNullable: true, validators: [Validators.required] });
 }
 
 describe('TextField', () => {
-  async function setup() {
+  async function setup(charset: TextCharset = 'any', mask: MaskPattern | null = null) {
     TestBed.configureTestingModule({ providers: [provideTestEnvironment()] });
     await loadTranslations();
     const fixture = TestBed.createComponent(Host);
+    fixture.componentInstance.charset.set(charset);
+    fixture.componentInstance.mask.set(mask);
     await fixture.whenStable();
     const root = fixture.nativeElement as HTMLElement;
     return {
@@ -76,6 +89,62 @@ describe('TextField', () => {
     expect(control.value).toBe('Papel A4');
     expect(control.dirty).toBe(true);
     expect(root.querySelector('.field--invalid')).toBeNull();
+  });
+
+  it('charset="letters" descarta números e símbolos, mantendo acentos', async () => {
+    const { input, control } = await setup('letters');
+
+    typeInto(input, "Ana D'Ávila-Souza 2@");
+
+    expect(input.value).toBe("Ana D'Ávila-Souza ");
+    expect(control.value).toBe("Ana D'Ávila-Souza ");
+  });
+
+  it('charset="digits" aceita só dígitos e abre o teclado numérico', async () => {
+    const { input, control } = await setup('digits');
+
+    expect(input.getAttribute('inputmode')).toBe('numeric');
+    typeInto(input, '12a-3');
+
+    expect(control.value).toBe('123');
+  });
+
+  it('sem charset aceita qualquer caractere', async () => {
+    const { input, control } = await setup();
+
+    expect(input.hasAttribute('inputmode')).toBe(false);
+    typeInto(input, 'Sala 3 #2');
+
+    expect(control.value).toBe('Sala 3 #2');
+  });
+
+  it('aplica a máscara durante a digitação', async () => {
+    const { input, control } = await setup('any', MASKS.cpf);
+
+    expect(input.getAttribute('inputmode')).toBe('numeric');
+    expect(input.getAttribute('maxlength')).toBe('14');
+    typeInto(input, '52998224725');
+
+    expect(input.value).toBe('529.982.247-25');
+    expect(control.value).toBe('529.982.247-25');
+  });
+
+  it('troca de máscara de telefone fixo para celular', async () => {
+    const { input } = await setup('any', MASKS.phone);
+
+    typeInto(input, '6132345678');
+    expect(input.value).toBe('(61) 3234-5678');
+    typeInto(input, '61912345678');
+    expect(input.value).toBe('(61) 91234-5678');
+  });
+
+  it('exibe formatado um valor sem máscara definido pelo código', async () => {
+    const { fixture, input, control } = await setup('any', MASKS.cep);
+
+    control.setValue('70040010');
+    await fixture.whenStable();
+
+    expect(input.value).toBe('70040-010');
   });
 
   it('reflete valores definidos pelo código (patchValue)', async () => {

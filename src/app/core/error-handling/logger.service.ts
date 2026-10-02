@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { APP_ENVIRONMENT } from '../../../environments/environment.token';
-import { LogLevel } from '../../../environments/environment.model';
+import { APP_ENVIRONMENT } from '@env/environment.token';
+import { LogLevel } from '@env/environment.model';
 
 const LEVEL_WEIGHT: Record<LogLevel, number> = { debug: 0, info: 1, warn: 2, error: 3, silent: 4 };
 

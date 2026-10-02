@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { TranslatePipe } from '../../../core/localization/translate.pipe';
+import { TranslatePipe } from '@core/localization/translate.pipe';
 import { FieldView } from '../base-field';
 import { FieldError } from '../field-error/field-error';
 
@@ -26,7 +26,11 @@ import { FieldError } from '../field-error/field-error';
       }
       <ng-content />
       @if (f.showError()) {
-        <app-field-error [errorId]="f.errorId()" [errors]="f.state().errors" [fieldLabel]="f.label()" />
+        <app-field-error
+          [errorId]="f.errorId()"
+          [errors]="f.state().errors"
+          [fieldLabel]="f.label()"
+        />
       }
     </div>
   `,

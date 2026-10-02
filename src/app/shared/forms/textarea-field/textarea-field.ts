@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { TranslatePipe } from '../../../core/localization/translate.pipe';
+import { TranslatePipe } from '@core/localization/translate.pipe';
 import { BaseField } from '../base-field';
 import { FieldFrame } from '../field-frame/field-frame';
 
@@ -41,7 +41,10 @@ export class TextareaField extends BaseField<string> {
     return max === null ? null : max - (this.state().value?.length ?? 0);
   });
   protected readonly textareaDescribedBy = computed(
-    () => [this.describedBy(), this.remaining() !== null ? this.counterId() : null].filter(Boolean).join(' ') || null,
+    () =>
+      [this.describedBy(), this.remaining() !== null ? this.counterId() : null]
+        .filter(Boolean)
+        .join(' ') || null,
   );
 
   protected onInput(event: Event): void {

@@ -7,8 +7,11 @@ import {
 } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Observable, of, switchMap, throwError, timer } from 'rxjs';
-import { APP_ENVIRONMENT } from '../environments/environment.token';
-import type { InventoryItem, InventoryItemInput } from '../app/features/estoque/data-access/inventory.models';
+import { APP_ENVIRONMENT } from '@env/environment.token';
+import type {
+  InventoryItem,
+  InventoryItemInput,
+} from '@features/estoque/data-access/inventory.models';
 import { MOCK_CREDENTIALS, MOCK_ITEMS, MOCK_TOKEN, MOCK_USER } from './mock-data';
 
 const LATENCY_MS = 350;
@@ -48,7 +51,8 @@ function route(req: HttpRequest<unknown>, path: string): Observable<HttpEvent<un
 }
 
 function signIn(body: { email?: string; password?: string }): Observable<HttpEvent<unknown>> {
-  const valid = body.email === MOCK_CREDENTIALS.email && body.password === MOCK_CREDENTIALS.password;
+  const valid =
+    body.email === MOCK_CREDENTIALS.email && body.password === MOCK_CREDENTIALS.password;
   return valid
     ? ok({ token: MOCK_TOKEN, user: MOCK_USER })
     : throwError(() => new HttpErrorResponse({ status: 401, statusText: 'Unauthorized' }));
@@ -70,7 +74,11 @@ function collectionRoute(req: HttpRequest<unknown>): Observable<HttpEvent<unknow
     if (skuTaken(input.sku)) {
       return fail(req, 422, { errors: { sku: 'estoque.errors.skuTaken' } });
     }
-    const created: InventoryItem = { ...input, id: String(Date.now()), updatedAt: new Date().toISOString() };
+    const created: InventoryItem = {
+      ...input,
+      id: String(Date.now()),
+      updatedAt: new Date().toISOString(),
+    };
     items = [...items, created];
     return ok(created, 201);
   }

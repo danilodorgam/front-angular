@@ -1,4 +1,5 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { CHARSETS } from '../charsets';
 
 /**
  * Mais restritivo que `Validators.email` do Angular, que aceita "a@b" (sem domínio).
@@ -30,10 +31,17 @@ function email(control: AbstractControl): ValidationErrors | null {
 
 export interface NumericOptions {
   readonly allowDecimal?: boolean;
+  /** Máximo de casas decimais (só faz sentido com `allowDecimal`). */
+  readonly decimalPlaces?: number;
 }
 
+/**
+ * Valida o formato numérico. O sinal e os limites ficam com `Validators.min`/`Validators.max`.
+ * Erros: `{ numeric: { allowDecimal } }` ou `{ decimalPlaces: { max, actual } }`.
+ */
 function numeric(options: NumericOptions = {}): ValidatorFn {
   const allowDecimal = options.allowDecimal ?? false;
+  const maxDecimals = options.decimalPlaces;
   return (control: AbstractControl): ValidationErrors | null => {
     const { value } = control;
     if (isEmpty(value)) {
@@ -43,9 +51,64 @@ function numeric(options: NumericOptions = {}): ValidatorFn {
       typeof value === 'number'
         ? Number.isFinite(value) && (allowDecimal || Number.isInteger(value))
         : (allowDecimal ? DECIMAL_PATTERN : INTEGER_PATTERN).test(String(value));
-    return valid ? null : { numeric: { allowDecimal } };
+    if (!valid) {
+      return { numeric: { allowDecimal } };
+    }
+    if (allowDecimal && maxDecimals !== undefined) {
+      const actual = countDecimals(value as number | string);
+      if (actual > maxDecimals) {
+        return { decimalPlaces: { max: maxDecimals, actual } };
+      }
+    }
+    return null;
   };
 }
 
+function countDecimals(value: number | string): number {
+  const text = typeof value === 'number' ? String(value) : value.replace(',', '.');
+  const [, decimals = ''] = text.split('.');
+  return decimals.length;
+}
+
+/**
+ * Igual ao `Validators.pattern`, mas com mensagem própria em vez do genérico "formato inválido".
+ * Ex.: `AppValidators.pattern(/^[A-Z0-9-]+$/, 'estoque.validation.sku')`.
+ * A mensagem recebe `{{field}}` como as demais.
+ */
+function pattern(regex: RegExp | string, messageKey: string): ValidatorFn {
+  const validator = Validators.pattern(regex);
+  return (control: AbstractControl): ValidationErrors | null => {
+    const errors = validator(control);
+    return errors ? { pattern: { ...errors['pattern'], messageKey } } : null;
+  };
+}
+
+/**
+ * Valida o conjunto de caracteres (mesmas regras do `charset` do TextField).
+ * Erro com o nome do conjunto: `{ letters: true }`, `{ alphanumeric: true }` ou `{ digits: true }`;
+ * a mensagem segue a convenção `validation.<erro>`.
+ */
+function charsetValidator(charset: keyof typeof CHARSETS): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const { value } = control;
+    if (isEmpty(value)) {
+      return null;
+    }
+    return CHARSETS[charset].accept.test(String(value)) ? null : { [charset]: true };
+  };
+}
+
+const letters = charsetValidator('letters');
+const alphanumeric = charsetValidator('alphanumeric');
+const digits = charsetValidator('digits');
+
 /** Validadores reutilizáveis, sem regra de negócio. Use junto com os do Angular. */
-export const AppValidators = { notBlank, email, numeric } as const;
+export const AppValidators = {
+  notBlank,
+  email,
+  numeric,
+  pattern,
+  letters,
+  alphanumeric,
+  digits,
+} as const;

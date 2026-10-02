@@ -35,6 +35,9 @@ describe('NotificationService', () => {
     service.error('errors.network');
     service.error('errors.server');
 
-    expect(service.notifications().map((n) => n.messageKey)).toEqual(['errors.network', 'errors.server']);
+    expect(service.notifications().map((n) => n.messageKey)).toEqual([
+      'errors.network',
+      'errors.server',
+    ]);
   });
 });

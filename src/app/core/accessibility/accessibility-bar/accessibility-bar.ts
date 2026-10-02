@@ -1,7 +1,13 @@
-import { ChangeDetectionStrategy, Component, Injector, afterNextRender, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Injector,
+  afterNextRender,
+  inject,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LayoutService } from '../../layout/layout.service';
-import { TranslatePipe } from '../../localization/translate.pipe';
+import { LayoutService } from '@core/layout/layout.service';
+import { TranslatePipe } from '@core/localization/translate.pipe';
 import { AccessibilityService } from '../accessibility.service';
 import { focusElementById } from '../focus';
 

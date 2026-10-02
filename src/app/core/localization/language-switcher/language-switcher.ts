@@ -13,7 +13,11 @@ import { TranslationService } from '../translation.service';
       <select class="language-switcher__select" (change)="change($event)">
         @for (language of translation.supportedLanguages; track language) {
           <!-- e-MAG 3.1: cada opção declara o próprio idioma -->
-          <option [value]="language" [attr.lang]="language" [selected]="language === translation.language()">
+          <option
+            [value]="language"
+            [attr.lang]="language"
+            [selected]="language === translation.language()"
+          >
             {{ labels[language] }}
           </option>
         }

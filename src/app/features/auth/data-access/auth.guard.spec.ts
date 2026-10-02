@@ -1,6 +1,11 @@
 import { signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { ActivatedRouteSnapshot, provideRouter, RouterStateSnapshot, UrlTree } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  provideRouter,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { authGuard, guestGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 
@@ -11,7 +16,10 @@ describe('guards de autenticação', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideRouter([]), { provide: AuthService, useValue: { isAuthenticated: authenticated } }],
+      providers: [
+        provideRouter([]),
+        { provide: AuthService, useValue: { isAuthenticated: authenticated } },
+      ],
     });
   });
 

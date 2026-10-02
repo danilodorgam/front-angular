@@ -46,6 +46,9 @@
     "titleEdit": "Editar item",
     "saved": "Item salvo com sucesso."
   },
+  "validation": {
+    "sku": "O campo {{field}} aceita somente letras sem acento, números e hífen."
+  },
   "errors": {
     "skuTaken": "Já existe um item com este código."
   }

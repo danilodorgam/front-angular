@@ -1,11 +1,15 @@
 @if (visible()) {
   <div #container class="error-summary" tabindex="-1" [attr.aria-labelledby]="headingId">
-    <h2 class="error-summary__title" [id]="headingId">{{ 'validation.summary.title' | translate }}</h2>
+    <h2 class="error-summary__title" [id]="headingId">
+      {{ 'validation.summary.title' | translate }}
+    </h2>
     <p>{{ 'validation.summary.intro' | translate: { count: errors().length } }}</p>
     <ul class="error-summary__list">
       @for (error of errors(); track error.inputId) {
         <li>
-          <a [href]="'#' + error.inputId" (click)="focusField($event, error.inputId)">{{ error.message }}</a>
+          <a [href]="'#' + error.inputId" (click)="focusField($event, error.inputId)">{{
+            error.message
+          }}</a>
         </li>
       }
     </ul>

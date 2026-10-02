@@ -1,17 +1,22 @@
-import { HttpInterceptorFn, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import {
+  HttpInterceptorFn,
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
-import { environment } from '../environments/environment';
-import { mockBackendInterceptor } from '../mocks/mock-backend.interceptor';
+import { environment } from '@env/environment';
+import { mockBackendInterceptor } from '@mocks/mock-backend.interceptor';
 import { APP_NAVIGATION } from './app.navigation';
 import { routes } from './app.routes';
-import { provideAccessibility } from './core/accessibility/accessibility.providers';
-import { provideErrorHandling } from './core/error-handling/error-handling.providers';
-import { httpErrorInterceptor } from './core/error-handling/http-error.interceptor';
-import { NAVIGATION_ITEMS } from './core/layout/navigation';
-import { provideLocalization } from './core/localization/localization.providers';
-import { authInterceptor } from './features/auth/data-access/auth.interceptor';
-import { provideAuth } from './features/auth/data-access/auth.providers';
+import { provideAccessibility } from '@core/accessibility/accessibility.providers';
+import { provideErrorHandling } from '@core/error-handling/error-handling.providers';
+import { httpErrorInterceptor } from '@core/error-handling/http-error.interceptor';
+import { NAVIGATION_ITEMS } from '@core/layout/navigation';
+import { provideLocalization } from '@core/localization/localization.providers';
+import { authInterceptor } from '@features/auth/data-access/auth.interceptor';
+import { provideAuth } from '@features/auth/data-access/auth.providers';
 
 /**
  * Ordem importa: a requisição passa de cima para baixo e a resposta volta de baixo para cima.

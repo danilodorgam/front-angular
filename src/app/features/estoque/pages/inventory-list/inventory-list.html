@@ -3,7 +3,9 @@
     <h1>{{ 'estoque.list.title' | translate }}</h1>
     <p class="text-muted">{{ 'estoque.list.intro' | translate }}</p>
   </div>
-  <a routerLink="/estoque/novo" class="btn btn--primary">{{ 'estoque.list.newItem' | translate }}</a>
+  <a routerLink="/estoque/novo" class="btn btn--primary">{{
+    'estoque.list.newItem' | translate
+  }}</a>
 </header>
 
 <form role="search" class="search-form" novalidate (submit)="onSearch($event)">
@@ -15,7 +17,9 @@
     [control]="search"
   />
   <div class="form-actions">
-    <button type="submit" class="btn btn--primary">{{ 'common.actions.search' | translate }}</button>
+    <button type="submit" class="btn btn--primary">
+      {{ 'common.actions.search' | translate }}
+    </button>
     <button type="button" class="btn btn--secondary" (click)="clearSearch()">
       {{ 'common.actions.clear' | translate }}
     </button>
@@ -37,7 +41,11 @@
   } @else {
     <div class="table-wrapper">
       <table class="table">
-        <caption>{{ 'estoque.list.caption' | translate: { count: items().length } }}</caption>
+        <caption>
+          {{
+            'estoque.list.caption' | translate: { count: items().length }
+          }}
+        </caption>
         <thead>
           <tr>
             <th scope="col">{{ 'estoque.fields.sku' | translate }}</th>
@@ -68,7 +76,9 @@
                 <!-- O texto oculto diferencia os links para leitores de tela ("Detalhes de Caneta azul"). -->
                 <a [routerLink]="['/estoque', item.id]">
                   {{ 'estoque.list.details' | translate }}
-                  <span class="sr-only">{{ 'estoque.list.detailsOf' | translate: { name: item.name } }}</span>
+                  <span class="sr-only">{{
+                    'estoque.list.detailsOf' | translate: { name: item.name }
+                  }}</span>
                 </a>
                 <a [routerLink]="['/estoque', item.id, 'editar']">
                   {{ 'common.actions.edit' | translate }}

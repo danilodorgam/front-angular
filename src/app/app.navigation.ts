@@ -1,4 +1,4 @@
-import { NavigationItem } from './core/layout/navigation';
+import { NavigationItem } from '@core/layout/navigation';
 
 /** Itens do menu lateral. `labelKey` é uma chave de tradução. */
 export const APP_NAVIGATION: readonly NavigationItem[] = [

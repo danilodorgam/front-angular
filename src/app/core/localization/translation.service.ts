@@ -1,6 +1,6 @@
 import { DOCUMENT, Injectable, inject, signal } from '@angular/core';
-import { APP_ENVIRONMENT } from '../../../environments/environment.token';
-import { readStorage, writeStorage } from '../../shared/utils/safe-storage';
+import { APP_ENVIRONMENT } from '@env/environment.token';
+import { readStorage, writeStorage } from '@shared/utils/safe-storage';
 import { isSupportedLanguage, SupportedLanguage } from './language';
 import { TRANSLATION_LOADER } from './translation-loader';
 import { TranslationCatalog, TranslationParams } from './translation.types';
@@ -62,7 +62,10 @@ export class TranslationService {
   }
 }
 
-function resolvePath(catalog: TranslationCatalog, key: string): string | TranslationCatalog | undefined {
+function resolvePath(
+  catalog: TranslationCatalog,
+  key: string,
+): string | TranslationCatalog | undefined {
   return key
     .split('.')
     .reduce<string | TranslationCatalog | undefined>(

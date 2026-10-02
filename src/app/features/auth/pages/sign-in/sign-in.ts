@@ -2,15 +2,22 @@ import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angu
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { finalize } from 'rxjs';
-import { isAppError } from '../../../core/error-handling/app-error';
-import { TranslatePipe } from '../../../core/localization/translate.pipe';
-import { EmailField, FormErrorSummary, SummaryField, TextField } from '../../../shared/forms';
-import { AppValidators } from '../../../shared/validation/validators/app-validators';
-import { AuthService } from '../data-access/auth.service';
+import { isAppError } from '@core/error-handling/app-error';
+import { TranslatePipe } from '@core/localization/translate.pipe';
+import { EmailField, FormErrorSummary, TextField } from '@shared/forms';
+import { AppValidators } from '@shared/validation/validators/app-validators';
+import { AuthService } from '../../data-access/auth.service';
 
 @Component({
   selector: 'app-sign-in',
-  imports: [ReactiveFormsModule, RouterLink, TranslatePipe, EmailField, TextField, FormErrorSummary],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    TranslatePipe,
+    EmailField,
+    TextField,
+    FormErrorSummary,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './sign-in.html',
 })
@@ -25,11 +32,6 @@ export class SignIn {
     email: ['', [Validators.required, AppValidators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
-
-  protected readonly fields: readonly SummaryField[] = [
-    { name: 'email', inputId: 'sign-in-email', label: 'auth.signIn.email' },
-    { name: 'password', inputId: 'sign-in-password', label: 'auth.signIn.password' },
-  ];
 
   protected readonly submitAttempt = signal(0);
   protected readonly submitting = signal(false);

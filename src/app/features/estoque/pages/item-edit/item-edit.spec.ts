@@ -2,11 +2,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
-import { loadTranslations, provideTestEnvironment, typeInto } from '../../../../testing/test-helpers';
-import { toAppError } from '../../../core/error-handling/http-error.mapper';
-import { NotificationService } from '../../../core/error-handling/notification.service';
-import { InventoryItem } from '../data-access/inventory.models';
-import { InventoryService } from '../data-access/inventory.service';
+import { loadTranslations, provideTestEnvironment, typeInto } from '@testing/test-helpers';
+import { toAppError } from '@core/error-handling/http-error.mapper';
+import { NotificationService } from '@core/error-handling/notification.service';
+import { InventoryItem } from '../../data-access/inventory.models';
+import { InventoryService } from '../../data-access/inventory.service';
 import { ItemEdit } from './item-edit';
 
 const SAVED: InventoryItem = {
@@ -28,7 +28,11 @@ describe('ItemEdit', () => {
 
   async function setup(id?: string) {
     TestBed.configureTestingModule({
-      providers: [provideTestEnvironment(), provideRouter([]), { provide: InventoryService, useValue: inventory }],
+      providers: [
+        provideTestEnvironment(),
+        provideRouter([]),
+        { provide: InventoryService, useValue: inventory },
+      ],
     });
     await loadTranslations();
     const fixture = TestBed.createComponent(ItemEdit);
@@ -57,7 +61,9 @@ describe('ItemEdit', () => {
     await submit();
 
     expect(inventory.create).not.toHaveBeenCalled();
-    const messages = Array.from(root.querySelectorAll('.error-summary li')).map((li) => li.textContent?.trim());
+    const messages = Array.from(root.querySelectorAll('.error-summary li')).map((li) =>
+      li.textContent?.trim(),
+    );
     expect(messages).toEqual([
       'Preencha o campo Código (SKU).',
       'Preencha o campo Nome.',
@@ -92,20 +98,29 @@ describe('ItemEdit', () => {
       unitPrice: 25.5,
       supplierEmail: '',
     });
-    expect(TestBed.inject(NotificationService).notifications()[0].messageKey).toBe('estoque.edit.saved');
+    expect(TestBed.inject(NotificationService).notifications()[0].messageKey).toBe(
+      'estoque.edit.saved',
+    );
     expect(navigate).toHaveBeenCalledWith(['/estoque', '42']);
   });
 
   it('exibe no campo o erro de validação devolvido pelo servidor', async () => {
     const { root, fillRequired, submit } = await setup();
-    const serverError = new HttpErrorResponse({ status: 422, error: { errors: { sku: 'estoque.errors.skuTaken' } } });
+    const serverError = new HttpErrorResponse({
+      status: 422,
+      error: { errors: { sku: 'estoque.errors.skuTaken' } },
+    });
     inventory.create.mockReturnValue(throwError(() => toAppError(serverError)));
 
     fillRequired();
     await submit();
 
-    expect(root.querySelector('#item-sku-erro')?.textContent).toContain('Já existe um item com este código.');
-    expect(root.querySelector('.error-summary')?.textContent).toContain('Já existe um item com este código.');
+    expect(root.querySelector('#item-sku-erro')?.textContent).toContain(
+      'Já existe um item com este código.',
+    );
+    expect(root.querySelector('.error-summary')?.textContent).toContain(
+      'Já existe um item com este código.',
+    );
   });
 
   it('carrega o item existente no modo edição', async () => {
@@ -115,6 +130,6 @@ describe('ItemEdit', () => {
     expect(inventory.getById).toHaveBeenCalledWith('42');
     expect(root.querySelector('h1')?.textContent).toContain('Editar item');
     expect(input('#item-name').value).toBe('Papel A4');
-    expect(input('#item-unit-price').value).toBe('25,5');
+    expect(input('#item-unit-price').value).toBe('25,50');
   });
 });

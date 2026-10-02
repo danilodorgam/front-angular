@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { LanguageSwitcher } from '../../localization/language-switcher/language-switcher';
-import { TranslatePipe } from '../../localization/translate.pipe';
+import { LanguageSwitcher } from '@core/localization/language-switcher/language-switcher';
+import { TranslatePipe } from '@core/localization/translate.pipe';
 import { LAYOUT_SESSION } from '../layout-session';
 import { LayoutService } from '../layout.service';
 

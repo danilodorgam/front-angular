@@ -1,7 +1,7 @@
 import { Injectable, effect, inject, signal } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
-import { TranslationService } from '../localization/translation.service';
+import { TranslationService } from '@core/localization/translation.service';
 import { LiveAnnouncer } from './live-announcer.service';
 
 /**
@@ -30,8 +30,12 @@ export class AppTitleStrategy extends TitleStrategy {
     this.title.setTitle(this.compose(key));
 
     if (!this.initialNavigation) {
-      const page = key ? this.translation.translate(key) : this.translation.translate('common.appName');
-      this.announcer.announce(this.translation.translate('accessibility.routeChanged', { title: page }));
+      const page = key
+        ? this.translation.translate(key)
+        : this.translation.translate('common.appName');
+      this.announcer.announce(
+        this.translation.translate('accessibility.routeChanged', { title: page }),
+      );
     }
     this.initialNavigation = false;
   }
